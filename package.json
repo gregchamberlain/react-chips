@@ -1,0 +1,38 @@
+{
+  "name": "react-component-skeleton",
+  "version": "0.1.0",
+  "description": "A simple responsive sidebar component for React",
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "main": "dist/bundle.js",
+  "scripts": {
+    "start": "hjs-dev-server",
+    "build": "NODE_ENV=production webpack --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregchamberlain/react-component-skeleton.git"
+  },
+  "author": "Greg Chamberlain <gregchamberlain94@gmail.com> (https://gregchamberlain.github.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregchamberlain/react-component-skeleton/issues"
+  },
+  "homepage": "https://github.com/gregchamberlain/react-component-skeleton#readme",
+  "devDependencies": {
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "hjs-webpack": "^7.2.1"
+  },
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-icons": "^2.2.1"
+  }
+}
