@@ -1,7 +1,6 @@
 var getConfig = require('hjs-webpack');
 
-
-module.exports = getConfig({
+var config = getConfig({
 
   isDev: process.env.NODE_ENV !== "production",
   // entry point for the app
@@ -25,3 +24,7 @@ module.exports = getConfig({
   // false by default
   clearBeforeBuild: true
 });
+
+config.output.libraryTarget = "commonjs2";
+
+module.exports = config;
