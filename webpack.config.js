@@ -10,7 +10,7 @@ var config = getConfig({
   clearBeforeBuild: true
 });
 
-if (process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV === "production"){
   config.output.libraryTarget = "commonjs2";
 }
 module.exports = config;
