@@ -1,1 +1,3 @@
-export Chips from './Chips';
+import Chips from './Chips';
+export default Chips;
+export Styles from './Styles';

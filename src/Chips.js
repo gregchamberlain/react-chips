@@ -10,7 +10,7 @@ class Chips extends Component {
     super(props)
     this.state = {
       value: "",
-      chips: ["Hello", "Goodbye", "Taco", "Pizza"],
+      chips: props.chips,
     };
   }
 
@@ -55,8 +55,11 @@ class Chips extends Component {
   }
 
   getItems = () => {
-    let items = ["Ruby", "Java", "CSS", "Javascript"];
-    return items.filter(item => this.state.chips.indexOf(item) === -1);
+    if (this.props.uniqueChips) {
+      return this.props.autoCompleteData.filter(item => this.state.chips.indexOf(item) === -1);
+    } else {
+      return this.props.autoCompleteData;
+    }
   }
 
   render() {
@@ -141,11 +144,12 @@ let styles = {
   }
 }
 
-Chips.propTypes ={
+Chips.propTypes = {
   wrapperStyle: PropTypes.object,
   autoCompleteData: PropTypes.array,
   autoCompleteOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
+  chips: PropTypes.array,
 };
 
 Chips.defaultProps = {
@@ -153,6 +157,7 @@ Chips.defaultProps = {
   autoCompleteData: ['Ruby', 'Java', 'Javascript', 'Go', 'C++', 'C', 'Swift'],
   autoCompleteOnly: false,
   uniqueChips: true,
+  chips: [],
 };
 
 export default Radium(Chips);

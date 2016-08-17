@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import Radium from 'radium';
 
-export default class Chip extends Component {
+class Chip extends Component {
 
   onClick = (e) => {
     this.props.onClick(this.props.index);
@@ -25,9 +26,16 @@ let styles = {
     background: "#ccc",
     margin: "2.5px",
     borderRadius: 3,
+    cursor: 'default',
   },
   close: {
     fontWeight: "bold",
     cursor: "pointer",
+    ':hover': {
+      color: 'red',
+    },
   }
 }
+
+
+export default Radium(Chip);
