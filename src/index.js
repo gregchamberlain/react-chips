@@ -1,1 +1,1 @@
-
+export Chips from './Chips';

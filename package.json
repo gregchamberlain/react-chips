@@ -1,5 +1,5 @@
 {
-  "name": "react-component-skeleton",
+  "name": "react-chips",
   "version": "0.1.0",
   "description": "A simple responsive sidebar component for React",
   "keywords": [
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregchamberlain/react-component-skeleton.git"
+    "url": "git+https://github.com/gregchamberlain/react-chips.git"
   },
   "author": "Greg Chamberlain <gregchamberlain94@gmail.com> (https://gregchamberlain.github.io)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gregchamberlain/react-component-skeleton/issues"
+    "url": "https://github.com/gregchamberlain/react-chips/issues"
   },
-  "homepage": "https://github.com/gregchamberlain/react-component-skeleton#readme",
+  "homepage": "https://github.com/gregchamberlain/react-chips#readme",
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.1.2",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "react": "^15.3.0",
+    "react-autocomplete": "^1.2.1",
     "react-dom": "^15.3.0"
   }
 }

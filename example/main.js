@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import {} from '../src'
+import { Chips } from '../src'
 
 render(
-
+  <Chips />,
 document.getElementById('root'))
