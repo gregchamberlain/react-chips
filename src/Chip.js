@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 export default class Chip extends Component {
 
   onClick = (e) => {
-    console.log(e)
+    this.props.onClick(this.props.index);
   }
 
   render() {

@@ -27,10 +27,28 @@ export default class Chips extends Component {
     }
   }
 
+  removeChip = (idx) => {
+    let { chips } = this.state;
+    let left = chips.slice(0, idx);
+    let right = chips.slice(idx + 1);
+    this.setState({chips: [...left, ...right]});
+  }
+
   renderChips = () => {
     return this.state.chips.map((chip, idx) => {
-      return <Chip key={`chip${idx}`} value={chip} />
+      return (
+        <Chip
+          onClick={this.removeChip}
+          index={idx}
+          key={`chip${idx}`}
+          value={chip} />
+        );
     });
+  }
+
+  getItems = () => {
+    let items = ["Ruby", "Java", "CSS", "Javascript"];
+    return items.filter(item => this.state.chips.indexOf(item) === -1);
   }
 
   render() {
@@ -45,7 +63,6 @@ export default class Chips extends Component {
             boxSizing: "border-box",
             width: "100%",
             padding: 5,
-            background: "red",
           }}}
           wrapperStyle={{
             display: "block",
@@ -64,7 +81,7 @@ export default class Chips extends Component {
              overflow: 'auto',
              maxHeight: '100px',
           }}
-          items={["Ruby", "Java", "CSS", "Javascript"]}
+          items={this.getItems()}
           getItemValue={(item) => item}
           shouldItemRender={(opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1}
           onChange={(event, value) => this.onChange(value)}
@@ -81,7 +98,7 @@ export default class Chips extends Component {
   }
 }
 
-export let styles = {
+let styles = {
   container: {
     display: "flex",
     position: "relative",
@@ -91,6 +108,7 @@ export let styles = {
     alignItems: "center",
     flexWrap: "wrap",
     padding: "2.5px",
+    borderRadius: 5,
   },
   item: {
     padding: '2px 6px',

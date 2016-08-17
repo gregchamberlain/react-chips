@@ -33,9 +33,13 @@
     "eslint": "^3.3.0",
     "hjs-webpack": "^7.2.1"
   },
+  "peerDependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-autocomplete": "^1.2.1"
+  },
   "dependencies": {
     "react": "^15.3.0",
-    "react-autocomplete": "^1.2.1",
     "react-dom": "^15.3.0"
   }
 }
