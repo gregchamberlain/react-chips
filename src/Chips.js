@@ -43,14 +43,26 @@ export default class Chips extends Component {
             border: "0",
             outline: "none",
             boxSizing: "border-box",
-            width: "98%",
+            width: "100%",
             padding: 5,
-            marginLeft: 5,
             background: "red",
           }}}
           wrapperStyle={{
             display: "block",
+            margin: 2.5,
             flexGrow: 1,
+          }}
+          menuStyle={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            borderRadius: '3px',
+            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+            background: 'rgba(255, 255, 255, 0.9)',
+             padding: '2px 0',
+             fontSize: '90%',
+             overflow: 'auto',
+             maxHeight: '100px',
           }}
           items={["Ruby", "Java", "CSS", "Javascript"]}
           getItemValue={(item) => item}
