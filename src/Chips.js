@@ -3,6 +3,7 @@ import Autocomplete from 'react-autocomplete'
 import Radium from 'radium';
 
 import Chip from './Chip';
+import { defaultStyles } from './Styles'
 
 class Chips extends Component {
 
@@ -15,7 +16,7 @@ class Chips extends Component {
   }
 
   onAutocompleteChange = (value) => {
-    if (value.indexOf(',') !== -1) {
+    if (!this.props.autoCompleteOnly && value.indexOf(',') !== -1) {
       let chips = value.split(",").map((val) => val.trim()).filter((val) => val !== "");
       chips.forEach(chip => {
         this.addChip(chip)
@@ -33,6 +34,7 @@ class Chips extends Component {
     }
     let chips = [...this.state.chips, object]
     this.setState({chips, value: ""})
+    this.props.onChange(this.state.chips);
   }
 
   removeChip = (idx) => {
@@ -40,6 +42,7 @@ class Chips extends Component {
     let left = chips.slice(0, idx);
     let right = chips.slice(idx + 1);
     this.setState({chips: [...left, ...right]});
+    this.props.onChange(this.state.chips);
   }
 
   renderChips = () => {
@@ -64,17 +67,11 @@ class Chips extends Component {
 
   render() {
     return (
-      <div style={this.props.wrapperStyle}>
+      <div style={this.props.style}>
         {this.renderChips()}
         <Autocomplete
           value={this.state.value}
-          inputProps={{name: "US state", id: "states-autocomplete", style: {
-            border: "0",
-            outline: "none",
-            boxSizing: "border-box",
-            width: "100%",
-            padding: 5,
-          }}}
+          inputProps={inputProps}
           wrapperStyle={styles.wrapper}
           menuStyle={styles.menu}
           items={this.getItems()}
@@ -95,18 +92,8 @@ class Chips extends Component {
 }
 
 
+
 let styles = {
-  container: {
-    display: "flex",
-    position: "relative",
-    border: "1px solid #ccc",
-    font: "13.33333px Arial",
-    minHeight: 24,
-    alignItems: "center",
-    flexWrap: "wrap",
-    padding: "2.5px",
-    borderRadius: 5,
-  },
   item: {
     padding: '2px 6px',
     cursor: 'default'
@@ -123,7 +110,11 @@ let styles = {
     border: 'solid 1px #ccc'
   },
   input: {
-
+    border: "0",
+    outline: "none",
+    boxSizing: "border-box",
+    width: "100%",
+    padding: 5,
   },
   wrapper: {
     display: "block",
@@ -144,20 +135,26 @@ let styles = {
   }
 }
 
+let inputProps = {
+  name: "US state", id: "states-autocomplete", style: styles.input
+}
+
 Chips.propTypes = {
   wrapperStyle: PropTypes.object,
   autoCompleteData: PropTypes.array,
   autoCompleteOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
+  onChange: PropTypes.func,
 };
 
 Chips.defaultProps = {
-  wrapperStyle: styles.container,
-  autoCompleteData: ['Ruby', 'Java', 'Javascript', 'Go', 'C++', 'C', 'Swift'],
+  style: defaultStyles.wrapper,
+  autoCompleteData: [],
   autoCompleteOnly: false,
   uniqueChips: true,
   chips: [],
+  onChange: () => {},
 };
 
 export default Radium(Chips);
