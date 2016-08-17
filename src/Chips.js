@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import Autocomplete from 'react-autocomplete'
+import Radium from 'radium';
 
 import Chip from './Chip';
 
-export default class Chips extends Component {
+class Chips extends Component {
 
   constructor(props) {
     super(props)
@@ -13,18 +14,25 @@ export default class Chips extends Component {
     };
   }
 
-  itemSelected = (value) => {
-    let chips = [...this.state.chips, value]
-    this.setState({chips, value: ""})
-  }
-
-  onChange = (value) => {
+  onAutocompleteChange = (value) => {
     if (value.indexOf(',') !== -1) {
       let chips = value.split(",").map((val) => val.trim()).filter((val) => val !== "");
-      this.setState({chips: this.state.chips.concat(chips), value: ""});
+      chips.forEach(chip => {
+        this.addChip(chip)
+      });
+      // this.setState({chips: this.state.chips.concat(chips), value: ""});
     } else {
       this.setState({value})
     }
+  }
+
+  addChip(object) {
+    if (this.props.uniqueChips && this.state.chips.indexOf(object) !== -1) {
+      this.setState({value: ""});
+      return;
+    }
+    let chips = [...this.state.chips, object]
+    this.setState({chips, value: ""})
   }
 
   removeChip = (idx) => {
@@ -42,7 +50,7 @@ export default class Chips extends Component {
           index={idx}
           key={`chip${idx}`}
           value={chip} />
-        );
+      );
     });
   }
 
@@ -53,7 +61,7 @@ export default class Chips extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div style={this.props.wrapperStyle}>
         {this.renderChips()}
         <Autocomplete
           value={this.state.value}
@@ -64,28 +72,13 @@ export default class Chips extends Component {
             width: "100%",
             padding: 5,
           }}}
-          wrapperStyle={{
-            display: "block",
-            margin: 2.5,
-            flexGrow: 1,
-          }}
-          menuStyle={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            borderRadius: '3px',
-            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-            background: 'rgba(255, 255, 255, 0.9)',
-             padding: '2px 0',
-             fontSize: '90%',
-             overflow: 'auto',
-             maxHeight: '100px',
-          }}
+          wrapperStyle={styles.wrapper}
+          menuStyle={styles.menu}
           items={this.getItems()}
           getItemValue={(item) => item}
           shouldItemRender={(opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1}
-          onChange={(event, value) => this.onChange(value)}
-          onSelect={value => this.itemSelected(value)}
+          onChange={(event, value) => this.onAutocompleteChange(value)}
+          onSelect={value => this.addChip(value)}
           renderItem={(item, isHighlighted) => (
             <div
               style={isHighlighted ? styles.highlightedItem : styles.item}
@@ -97,6 +90,7 @@ export default class Chips extends Component {
     );
   }
 }
+
 
 let styles = {
   container: {
@@ -124,5 +118,41 @@ let styles = {
 
   menu: {
     border: 'solid 1px #ccc'
+  },
+  input: {
+
+  },
+  wrapper: {
+    display: "block",
+    margin: 2.5,
+    flexGrow: 1,
+  },
+  menu: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    borderRadius: '3px',
+    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+    background: 'rgba(255, 255, 255, 0.9)',
+    padding: '2px 0',
+    fontSize: '90%',
+    overflow: 'auto',
+    maxHeight: '100px',
   }
 }
+
+Chips.propTypes ={
+  wrapperStyle: PropTypes.object,
+  autoCompleteData: PropTypes.array,
+  autoCompleteOnly: PropTypes.bool,
+  uniqueChips: PropTypes.bool,
+};
+
+Chips.defaultProps = {
+  wrapperStyle: styles.container,
+  autoCompleteData: ['Ruby', 'Java', 'Javascript', 'Go', 'C++', 'C', 'Swift'],
+  autoCompleteOnly: false,
+  uniqueChips: true,
+};
+
+export default Radium(Chips);
