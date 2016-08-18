@@ -25,7 +25,7 @@ document.getElementById('root'))
 
 ## Styles
 
-This project uses the [Radium](http://stack.formidable.com/radium/) library for styling. You may pass in hover, and focus states to be styles on specified elements. 
+This project uses the [Radium](http://stack.formidable.com/radium/) library for styling. You may pass in hover, and focus states to be styles on specified elements.
 
 [Wrapper](#wrapper)
 [Chip](#chip)
@@ -33,7 +33,7 @@ This project uses the [Radium](http://stack.formidable.com/radium/) library for 
 ### Wrapper
 ```javascript
 wrapper: {
-	display: "flex",
+  display: "flex",
   position: "relative",
   border: "1px solid #ccc",
   font: "13.33333px Arial",
@@ -46,19 +46,19 @@ wrapper: {
 ```
 
 ### Chip
-Each chip has a default and selected style. When rendering the selected style it will be merged with the default, inheriting any styles is has not overridden.
+Each chip has a default and selected style. When rendering the selected style it will be merged with the default, inheriting any styles it has not overridden.
 
 ```javascript
 chip: {
-	default: {
-		padding: 5,
-		background: "#ccc",
-		margin: "2.5px",
-		borderRadius: 3,
-		cursor: 'default',
-	},
-	selected: {
-		background: "#888",
-	}
+  default: {
+    padding: 5,
+    background: "#ccc",
+    margin: "2.5px",
+    borderRadius: 3,
+    cursor: 'default',
+  },
+  selected: {
+    background: "#888",
+  },
 }
 ```
