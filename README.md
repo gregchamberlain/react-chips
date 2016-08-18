@@ -21,6 +21,7 @@ document.getElementById('root'))
 |autoCompleteOnly|bool|false|
 |uniqueChips|bool|true|
 |chips|array|[]|
+|chipStyle|object|Styles.chip
 
 ## Styles
 

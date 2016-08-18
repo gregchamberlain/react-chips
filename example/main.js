@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Chips from '../src'
+import Chips, { Styles } from '../src'
+console.log(Styles)
 
 render(
   <Chips

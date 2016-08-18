@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import Radium from 'radium';
 
+import { defaultStyles } from './Styles';
+
 class Chip extends Component {
 
   onClick = (e) => {
@@ -9,7 +11,7 @@ class Chip extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div style={this.props.style}>
         {this.props.value}
         <span
           style={styles.close}
@@ -19,15 +21,15 @@ class Chip extends Component {
   }
 }
 
+Chip.propTypes = {
+  style: PropTypes.object
+}
+
+Chip.defaultProps = {
+  style: defaultStyles.chip
+}
 
 let styles = {
-  container: {
-    padding: 5,
-    background: "#ccc",
-    margin: "2.5px",
-    borderRadius: 3,
-    cursor: 'default',
-  },
   close: {
     fontWeight: "bold",
     cursor: "pointer",

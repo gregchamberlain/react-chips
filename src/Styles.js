@@ -10,4 +10,11 @@ export let defaultStyles = {
     padding: "2.5px",
     borderRadius: 5,
   },
+  chip: {
+  	padding: 5,
+    background: "#ccc",
+    margin: "2.5px",
+    borderRadius: 3,
+    cursor: 'default',
+  }
 }
