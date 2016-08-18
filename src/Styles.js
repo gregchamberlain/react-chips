@@ -9,12 +9,25 @@ export let defaultStyles = {
     flexWrap: "wrap",
     padding: "2.5px",
     borderRadius: 5,
+    ':focus': {
+    	border: "1px solid green",
+    },
   },
   chip: {
-  	padding: 5,
-    background: "#ccc",
-    margin: "2.5px",
-    borderRadius: 3,
-    cursor: 'default',
+  	default: {
+  		padding: 5,
+	    background: "#ccc",
+	    margin: "2.5px",
+	    borderRadius: 3,
+	    cursor: 'default',
+  	},
+  	selected: {
+  		background: '#888',
+  	}
   }
 }
+
+// defaultStyles.chip.selected = {
+// 	...defaultStyles.chip.default,
+// 	background: "#444",
+// }

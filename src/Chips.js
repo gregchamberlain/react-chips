@@ -12,7 +12,43 @@ class Chips extends Component {
     this.state = {
       value: "",
       chips: props.chips,
+      deletable: false,
     };
+  }
+
+  componentDidMount = () => {
+    let input = document.getElementById('autocomplete-input');
+    let chips = document.getElementById('chips-wrapper');
+    input.addEventListener('focus', (e) => {
+      chips.focus()
+    });
+    input.addEventListener('blur', (e) => {
+      chips.blur();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.keyCode === 8) {
+        this.onBackspace();
+      } else if (this.state.deletable) {
+        this.setState({deletable: false});
+      }
+    });
+  }
+
+  handleKeyEvent = (e) => {
+
+  }
+
+  onBackspace = (code) => {
+    if (this.state.value === "" && this.state.chips.length > 0) {
+      if (this.state.deletable) {
+        this.setState({
+          deletable: false,
+          chips: this.state.chips.slice(0,this.state.chips.length - 1),
+        })
+      } else {
+        this.setState({deletable: true})
+      }
+    }
   }
 
   onAutocompleteChange = (value) => {
@@ -49,6 +85,8 @@ class Chips extends Component {
     return this.state.chips.map((chip, idx) => {
       return (
         <Chip
+          selected={this.state.deletable && idx === this.state.chips.length - 1}
+          style={this.props.chipStyle}
           onClick={this.removeChip}
           index={idx}
           key={`chip${idx}`}
@@ -67,7 +105,7 @@ class Chips extends Component {
 
   render() {
     return (
-      <div style={this.props.style}>
+      <div style={this.props.style} id="chips-wrapper">
         {this.renderChips()}
         <Autocomplete
           value={this.state.value}
@@ -84,7 +122,7 @@ class Chips extends Component {
               style={isHighlighted ? styles.highlightedItem : styles.item}
               key={item.abbr}
             >{item}</div>
-          )}
+          )}  
           />
       </div>
     );
@@ -136,7 +174,7 @@ let styles = {
 }
 
 let inputProps = {
-  name: "US state", id: "states-autocomplete", style: styles.input
+  id: "autocomplete-input", style: styles.input
 }
 
 Chips.propTypes = {
@@ -146,6 +184,7 @@ Chips.propTypes = {
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
   onChange: PropTypes.func,
+  chipStyle: PropTypes.object,
 };
 
 Chips.defaultProps = {
@@ -155,6 +194,7 @@ Chips.defaultProps = {
   uniqueChips: true,
   chips: [],
   onChange: () => {},
+  chipStyle: defaultStyles.chip
 };
 
 export default Radium(Chips);

@@ -10,8 +10,11 @@ class Chip extends Component {
   }
 
   render() {
+
+    let { style, selected } = this.props;
+
     return (
-      <div style={this.props.style}>
+      <div style={selected ? {...style.default, ...style.selected} : style.default}>
         {this.props.value}
         <span
           style={styles.close}
@@ -22,11 +25,12 @@ class Chip extends Component {
 }
 
 Chip.propTypes = {
-  style: PropTypes.object
+  style: PropTypes.object,
+  selected: PropTypes.bool,
 }
 
 Chip.defaultProps = {
-  style: defaultStyles.chip
+  selected: false,
 }
 
 let styles = {
