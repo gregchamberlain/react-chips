@@ -64,7 +64,7 @@ class Chips extends Component {
   }
 
   addChip = (value, object) => {
-    let newChip = this.props.getChipValue(object)
+    let newChip = this.props.getChipValue(object === undefined ? value : object)
     if (this.props.uniqueChips && this.state.chips.indexOf(newChip) !== -1) {
       this.setState({value: ""});
       return;

@@ -18,8 +18,13 @@ render(
     renderChip={(item) => (
       <Chip value={item}/>
     )}
-    getChipValue={(item) => `${item.name} - ${item.yr}`}
-    autoCompleteOnly={true}
+    getChipValue={(item) => {
+      if (typeof item === "string") {
+        return item
+      } else {
+        return `${item.name} - ${item.yr}`
+      }
+    }}
     renderListItem={(item, isHighlighted) => (
       <div
         style={isHighlighted ? {
