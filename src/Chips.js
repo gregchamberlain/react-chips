@@ -43,7 +43,7 @@ class Chips extends Component {
       if (this.state.chipSelected) {
         this.setState({
           chipSelected: false,
-          chips: this.state.chips.slice(0,this.state.chips.length - 1),
+          chips: this.state.chips.slice(0,-1),
         })
       } else {
         this.setState({chipSelected: true})
@@ -63,12 +63,13 @@ class Chips extends Component {
     }
   }
 
-  addChip(object) {
-    if (this.props.uniqueChips && this.state.chips.indexOf(object) !== -1) {
+  addChip = (value, object) => {
+    let newChip = this.props.getChipValue(object)
+    if (this.props.uniqueChips && this.state.chips.indexOf(newChip) !== -1) {
       this.setState({value: ""});
       return;
     }
-    let chips = [...this.state.chips, object]
+    let chips = [...this.state.chips, newChip]
     this.setState({chips, value: ""})
     this.props.onChange(this.state.chips);
   }
@@ -84,20 +85,19 @@ class Chips extends Component {
   renderChips = () => {
     return this.state.chips.map((chip, idx) => {
       return (
-        <this.props.chipComponent
-          selected={this.state.chipSelected && idx === this.state.chips.length - 1}
-          style={this.props.chipStyle}
-          onRemove={this.removeChip}
-          index={idx}
-          key={`chip${idx}`}
-          value={chip} />
+        React.cloneElement(this.props.renderChip(chip), {
+          selected: this.state.chipSelected && idx === this.state.chips.length - 1,
+          onRemove: this.removeChip,
+          index: idx,
+          key: `chip${idx}`,
+        })
       );
     });
   }
 
   getItems = () => {
     if (this.props.uniqueChips) {
-      return this.props.autoCompleteData.filter(item => this.state.chips.indexOf(item) === -1);
+      return this.props.autoCompleteData.filter(item => this.state.chips.indexOf(this.props.getChipValue(item)) === -1);
     } else {
       return this.props.autoCompleteData;
     }
@@ -113,16 +113,11 @@ class Chips extends Component {
           wrapperStyle={styles.wrapper}
           menuStyle={styles.menu}
           items={this.getItems()}
-          getItemValue={(item) => item}
-          shouldItemRender={(opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1}
+          getItemValue={() => ""}
+          shouldItemRender={this.props.listFilter}
           onChange={(event, value) => this.onAutocompleteChange(value)}
-          onSelect={value => this.addChip(value)}
-          renderItem={(item, isHighlighted) => (
-            <div
-              style={isHighlighted ? styles.highlightedItem : styles.item}
-              key={item.abbr}
-            >{item}</div>
-          )}
+          onSelect={this.addChip}
+          renderItem={this.props.renderListItem}
           />
       </div>
     );
@@ -132,18 +127,6 @@ class Chips extends Component {
 
 
 let styles = {
-  item: {
-    padding: '2px 6px',
-    cursor: 'default'
-  },
-
-  highlightedItem: {
-    color: 'white',
-    background: 'hsl(200, 50%, 50%)',
-    padding: '2px 6px',
-    cursor: 'default'
-  },
-
   menu: {
     border: 'solid 1px #ccc'
   },
@@ -184,8 +167,10 @@ Chips.propTypes = {
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
   onChange: PropTypes.func,
-  chipStyle: PropTypes.object,
-  chipComponent: PropTypes.element,
+  renderChip: PropTypes.func,
+  renderListItem: PropTypes.func,
+  listFilter: PropTypes.func,
+  getChipValue: PropTypes.func,
 };
 
 Chips.defaultProps = {
@@ -195,8 +180,18 @@ Chips.defaultProps = {
   uniqueChips: true,
   chips: [],
   onChange: () => {},
-  chipStyle: defaultStyles.chip,
-  chipComponent: Chip
+  renderChip: (value) => (<Chip value={value}/>),
+  renderListItem: (item, isHighlighted) => (
+    <div
+      style={isHighlighted ? {
+        ...defaultStyles.listItem.default,
+        ...defaultStyles.listItem.highlighted
+      } : defaultStyles.listItem.default}
+      key={item.abbr}
+    >{`NOOO! - ${item}`}</div>
+  ),
+  listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
+  getChipValue: (item) => item,
 };
 
 export default Radium(Chips);

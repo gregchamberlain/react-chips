@@ -27,11 +27,12 @@ class Chip extends Component {
 Chip.propTypes = {
   style: PropTypes.object,
   selected: PropTypes.bool,
-  onRemove: PropTypes.func.isRequired,
+  onRemove: PropTypes.func,
 }
 
 Chip.defaultProps = {
   selected: false,
+  style: defaultStyles.chip,
 }
 
 let styles = {

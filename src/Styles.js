@@ -24,10 +24,16 @@ export let defaultStyles = {
   	selected: {
   		background: '#888',
   	}
-  }
-}
+  },
+	listItem: {
+		default: {
+	    padding: '2px 6px',
+	    cursor: 'default'
+	  },
 
-// defaultStyles.chip.selected = {
-// 	...defaultStyles.chip.default,
-// 	background: "#444",
-// }
+	  highlighted: {
+	    color: 'white',
+	    background: 'hsl(200, 50%, 50%)',
+	  },
+	}
+}

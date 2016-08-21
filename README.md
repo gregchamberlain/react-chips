@@ -2,13 +2,15 @@
 
 ## Getting Started
 
-```javascript
+```js
 import React from 'react';
 import { render } from 'react-dom';
-import Chips from '../src'
+import Chips, { Chip, Styles } from '../src'
 
 render(
-  <Chips />,
+  <Chips
+    autoCompleteData={["Your", "Data", "Here"]}
+     />,
 document.getElementById('root'))
 ```
 
@@ -21,7 +23,11 @@ document.getElementById('root'))
 |autoCompleteOnly|bool|false|Only allow chips to be added from the autocomplete list|
 |uniqueChips|bool|true|Only allow one chip for each object|
 |chips|array|[]|Default chips to fill the component with|
-|chipStyle|object|Styles.chip|Styling for each chip in the component|
+|onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
+|renderChip|func|utils.renderChip|For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
+|renderListItem|func|utils.renderListItem|For custom autocomplete list item usage. A function that passes the value and highlighted state as arguments, must return an element to render for each list item.|
+|listFilter|func|utils.listFilter|A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
+|getChipValue|func|utils.getChipValue|A function used to change the value that is passed into each chip.|
 
 ## Styles
 
@@ -64,12 +70,10 @@ chip: {
 ```
 
 ## Custom Chip Component
-You may pass in a custom component to be used as each chips. This component will receive the following props.
+You may use a custom chip component, just pass your custom component into the function in renderChip prop. This component will receive the following additional props from the Chips component.
 
 |Property|Type|Description|
 |--------|----|-----------|
 |selected|bool|A boolean that tells the chip if it is currently selected.|
-|style|object|A style object that can be optionally used to style the chip.|
-|onRemove|func|A function to call, passing in the index prop, when the chip sould be removed.|
-|index|number|The index of this chip in the chips array. Used when calling onRemove.|
-|value|string|Information to be displayed in the chip.|
+|onRemove|func|A function to call when the chip should be removed, the index prop must be passed in as an argument.|
+|index|number|The index of this chip in the chips array. Pass as an argument calling onRemove prop.|
