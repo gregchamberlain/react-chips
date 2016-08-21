@@ -12,7 +12,7 @@ class Chips extends Component {
     this.state = {
       value: "",
       chips: props.chips,
-      deletable: false,
+      chipSelected: false,
     };
   }
 
@@ -20,7 +20,7 @@ class Chips extends Component {
     let input = document.getElementById('autocomplete-input');
     let chips = document.getElementById('chips-wrapper');
     input.addEventListener('focus', (e) => {
-      chips.focus()
+      chips.focus();
     });
     input.addEventListener('blur', (e) => {
       chips.blur();
@@ -28,8 +28,8 @@ class Chips extends Component {
     input.addEventListener('keydown', (e) => {
       if (e.keyCode === 8) {
         this.onBackspace();
-      } else if (this.state.deletable) {
-        this.setState({deletable: false});
+      } else if (this.state.chipSelected) {
+        this.setState({chipSelected: false});
       }
     });
   }
@@ -40,13 +40,13 @@ class Chips extends Component {
 
   onBackspace = (code) => {
     if (this.state.value === "" && this.state.chips.length > 0) {
-      if (this.state.deletable) {
+      if (this.state.chipSelected) {
         this.setState({
-          deletable: false,
+          chipSelected: false,
           chips: this.state.chips.slice(0,this.state.chips.length - 1),
         })
       } else {
-        this.setState({deletable: true})
+        this.setState({chipSelected: true})
       }
     }
   }
@@ -84,10 +84,10 @@ class Chips extends Component {
   renderChips = () => {
     return this.state.chips.map((chip, idx) => {
       return (
-        <Chip
-          selected={this.state.deletable && idx === this.state.chips.length - 1}
+        <this.props.chipComponent
+          selected={this.state.chipSelected && idx === this.state.chips.length - 1}
           style={this.props.chipStyle}
-          onClick={this.removeChip}
+          onRemove={this.removeChip}
           index={idx}
           key={`chip${idx}`}
           value={chip} />
@@ -105,7 +105,7 @@ class Chips extends Component {
 
   render() {
     return (
-      <div style={this.props.style} id="chips-wrapper">
+      <div style={this.props.style} id="chips-wrapper" >
         {this.renderChips()}
         <Autocomplete
           value={this.state.value}
@@ -122,7 +122,7 @@ class Chips extends Component {
               style={isHighlighted ? styles.highlightedItem : styles.item}
               key={item.abbr}
             >{item}</div>
-          )}  
+          )}
           />
       </div>
     );
@@ -185,6 +185,7 @@ Chips.propTypes = {
   chips: PropTypes.array,
   onChange: PropTypes.func,
   chipStyle: PropTypes.object,
+  chipComponent: PropTypes.element,
 };
 
 Chips.defaultProps = {
@@ -194,7 +195,8 @@ Chips.defaultProps = {
   uniqueChips: true,
   chips: [],
   onChange: () => {},
-  chipStyle: defaultStyles.chip
+  chipStyle: defaultStyles.chip,
+  chipComponent: Chip
 };
 
 export default Radium(Chips);

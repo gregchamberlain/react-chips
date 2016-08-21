@@ -27,8 +27,8 @@ document.getElementById('root'))
 
 This project uses the [Radium](http://stack.formidable.com/radium/) library for styling. You may pass in hover, and focus states to be styles on specified elements.
 
-[Wrapper](#wrapper)
-[Chip](#chip)
+- [Wrapper](#wrapper)
+- [Chip](#chip)
 
 ### Wrapper
 ```javascript
@@ -62,3 +62,14 @@ chip: {
   },
 }
 ```
+
+## Custom Chip Component
+You may pass in a custom component to be used as each chips. This component will receive the following props.
+
+|Property|Type|Description|
+|--------|----|-----------|
+|selected|bool|A boolean that tells the chip if it is currently selected.|
+|style|object|A style object that can be optionally used to style the chip.|
+|onRemove|func|A function to call, passing in the index prop, when the chip sould be removed.|
+|index|number|The index of this chip in the chips array. Used when calling onRemove.|
+|value|string|Information to be displayed in the chip.|

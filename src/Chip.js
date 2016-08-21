@@ -5,8 +5,8 @@ import { defaultStyles } from './Styles';
 
 class Chip extends Component {
 
-  onClick = (e) => {
-    this.props.onClick(this.props.index);
+  onRemoveClicked = (e) => {
+    this.props.onRemove(this.props.index);
   }
 
   render() {
@@ -18,7 +18,7 @@ class Chip extends Component {
         {this.props.value}
         <span
           style={styles.close}
-          onClick={() => this.onClick(this.props.value)}> &times;</span>
+          onClick={this.onRemoveClicked}> &times;</span>
       </div>
     );
   }
@@ -27,6 +27,7 @@ class Chip extends Component {
 Chip.propTypes = {
   style: PropTypes.object,
   selected: PropTypes.bool,
+  onRemove: PropTypes.func.isRequired,
 }
 
 Chip.defaultProps = {
