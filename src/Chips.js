@@ -161,7 +161,7 @@ let inputProps = {
 }
 
 Chips.propTypes = {
-  wrapperStyle: PropTypes.object,
+  style: PropTypes.object,
   autoCompleteData: PropTypes.array,
   autoCompleteOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
@@ -193,5 +193,4 @@ Chips.defaultProps = {
   listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,
 };
-
 export default Radium(Chips);
