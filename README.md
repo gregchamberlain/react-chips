@@ -1,4 +1,4 @@
-# react-chips
+# react-chips [![npm version](https://badge.fury.io/js/react-chips.svg)](https://badge.fury.io/js/react-chips)
 
 ## Getting Started
 
