@@ -34,10 +34,6 @@ class Chips extends Component {
     });
   }
 
-  handleKeyEvent = (e) => {
-
-  }
-
   onBackspace = (code) => {
     if (this.state.value === "" && this.state.chips.length > 0) {
       if (this.state.chipSelected) {
@@ -57,7 +53,6 @@ class Chips extends Component {
       chips.forEach(chip => {
         this.addChip(chip)
       });
-      // this.setState({chips: this.state.chips.concat(chips), value: ""});
     } else {
       this.setState({value})
     }

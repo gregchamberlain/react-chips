@@ -10,7 +10,7 @@ export let defaultStyles = {
     padding: "2.5px",
     borderRadius: 5,
     ':focus': {
-    	border: "1px solid green",
+    	border: "1px solid #aaa",
     },
   },
   chip: {
@@ -27,6 +27,8 @@ export let defaultStyles = {
   },
 	listItem: {
 		default: {
+			display: "flex",
+			alignItems: "center",
 	    padding: '2px 6px',
 	    cursor: 'default'
 	  },

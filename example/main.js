@@ -1,30 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Chips, { Styles, Chip } from '../src'
+import CustomChip from './CustomChip'
 
 let data = [
-  {name: "Ruby", yr: 1994},
-  {name: "Java", yr: 1998},
-  {name: "Javascript", yr: 2001},
-  {name: "Go", yr: 2006},
-  {name: "C++", yr: 1995},
-  {name: "C", yr: 1987},
-  {name: "Swift", yr: 2010},
+  {name: "Greg Chamberlain", image: "https://scontent-mia1-2.xx.fbcdn.net/v/t1.0-9/13600191_10208541837936750_8149579611814361860_n.jpg?oh=aa4de98353a4743f40159704df799178&oe=583F65E3"},
+  {name: "Spencer Gander", image: "https://scontent-mia1-2.xx.fbcdn.net/v/t1.0-9/13882281_1153219218034621_594044806989828947_n.jpg?oh=b10465238a1618b655f55ec3ba67a50a&oe=585E7D9D"},
+  {name: "Walker Nelson", image: "https://scontent-mia1-2.xx.fbcdn.net/v/t1.0-9/10534614_10204477181792812_5032954756891491515_n.jpg?oh=5c36d9b6e6b7f14fab011441a7234737&oe=584E0D61"},
+  {name: "Cody Heller", image: "https://scontent-mia1-2.xx.fbcdn.net/v/t1.0-9/12112379_10208151881018458_6178246044306481495_n.jpg?oh=0db0684e9e09f5d5b778744bcd620e31&oe=5811C776"},
 ]
 
 render(
   <Chips
   	autoCompleteData={data}
     renderChip={(item) => (
-      <Chip value={item}/>
+      <CustomChip image={item.image}>{item.name}</CustomChip>
     )}
-    getChipValue={(item) => {
-      if (typeof item === "string") {
-        return item
-      } else {
-        return `${item.name} - ${item.yr}`
-      }
-    }}
+    autoCompleteOnly={true}
     renderListItem={(item, isHighlighted) => (
       <div
         style={isHighlighted ? {
@@ -32,11 +24,10 @@ render(
           ...Styles.listItem.highlighted
         } : Styles.listItem.default}
         key={item.abbr}
-      ><strong>{item.name}</strong> - {item.yr}</div>
+      ><img src={item.image} width={25} height={25}/>{item.name}</div>
     )}
     listFilter={(opt, val) => (
-      opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1 ||
-      opt.yr.toString().indexOf(val.toLowerCase()) !== -1
+      opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
     )}
   	/>,
 document.getElementById('root'))
