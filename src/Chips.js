@@ -182,7 +182,7 @@ Chips.defaultProps = {
         ...defaultStyles.listItem.default,
         ...defaultStyles.listItem.highlighted
       } : defaultStyles.listItem.default}
-      key={item.abbr}
+      key={JSON.stringify(item)}
     >{item}</div>
   ),
   listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
