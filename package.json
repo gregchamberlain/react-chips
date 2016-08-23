@@ -1,7 +1,7 @@
 {
-  "name": "react-chips",
-  "version": "0.1.1",
-  "description": "A flexible and easy to use Chips component for React",
+  "name": "react-chips-gh-pages",
+  "version": "0.1.0",
+  "description": "Github pages for React Chips",
   "keywords": [
     "react",
     "react-component"
@@ -42,9 +42,8 @@
     "react-autocomplete": "^1.2.1"
   },
   "dependencies": {
-    "radium": "^0.18.1",
     "react": "^15.3.0",
-    "react-autocomplete": "^1.2.1",
+    "react-chips": "^0.1.1",
     "react-dom": "^15.3.0"
   }
 }
