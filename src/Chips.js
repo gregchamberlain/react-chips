@@ -183,7 +183,7 @@ Chips.defaultProps = {
         ...defaultStyles.listItem.highlighted
       } : defaultStyles.listItem.default}
       key={item.abbr}
-    >{`NOOO! - ${item}`}</div>
+    >{item}</div>
   ),
   listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,

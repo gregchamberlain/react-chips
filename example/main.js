@@ -11,34 +11,37 @@ let data = [
 ]
 
 render(
-  <Chips
-    style={{
-      ...Styles.wrapper,
-      border: "none",
-      borderRadius: 2,
-      padding: 5,
-      minHeight: 42,
-      boxShadow: "2px 2px 20px rgba(0,0,0,0.3)",
-      ':focus': {
-        border: "none",
-      }
-    }}
-  	autoCompleteData={data}
-    renderChip={(item) => (
-      <CustomChip image={item.image}>{item.name}</CustomChip>
-    )}
-    autoCompleteOnly={true}
-    renderListItem={(item, isHighlighted) => (
-      <div
-        style={isHighlighted ? {
-          ...Styles.listItem.default,
-          ...Styles.listItem.highlighted
-        } : Styles.listItem.default}
-        key={item.abbr}
-      ><img src={item.image} width={24} height={24} style={{margin: 5}}/>{item.name}</div>
-    )}
-    listFilter={(opt, val) => (
-      opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
-    )}
-  	/>,
-document.getElementById('root'))
+  <Chips autoCompleteData={["Hello", "Goodbye", "Auvua"]} />
+,document.getElementById("root"))
+// render(
+//   <Chips
+//     style={{
+//       ...Styles.wrapper,
+//       border: "none",
+//       borderRadius: 2,
+//       padding: 5,
+//       minHeight: 42,
+//       boxShadow: "2px 2px 20px rgba(0,0,0,0.3)",
+//       ':focus': {
+//         border: "none",
+//       }
+//     }}
+//   	autoCompleteData={data}
+//     renderChip={(item) => (
+//       <CustomChip image={item.image}>{item.name}</CustomChip>
+//     )}
+//     autoCompleteOnly={true}
+//     renderListItem={(item, isHighlighted) => (
+//       <div
+//         style={isHighlighted ? {
+//           ...Styles.listItem.default,
+//           ...Styles.listItem.highlighted
+//         } : Styles.listItem.default}
+//         key={item.abbr}
+//       ><img src={item.image} width={24} height={24} style={{margin: 5}}/>{item.name}</div>
+//     )}
+//     listFilter={(opt, val) => (
+//       opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
+//     )}
+//   	/>,
+// document.getElementById('root'))
