@@ -122,9 +122,9 @@ class Chips extends Component {
 
 
 let styles = {
-  menu: {
-    border: 'solid 1px #ccc'
-  },
+  // menu: {
+  //   border: 'solid 1px #ccc'
+  // },
   input: {
     border: "0",
     outline: "none",

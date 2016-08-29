@@ -1,5 +1,4 @@
 var getConfig = require('hjs-webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var config = getConfig({
   isDev: process.env.NODE_ENV !== "production",
