@@ -117,10 +117,9 @@ class Chips extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    console.log(value);
     const { autoCompleteData, listFilter } = this.props;
     this.setState({
-      suggestions: autoCompleteData.filter(opts => listFilter(opts, value))
+      suggestions: this.getItems().filter(opts => listFilter(opts, value))
     });
   }
 
@@ -142,14 +141,14 @@ class Chips extends Component {
       onChange: this.onChange,
       onKeyDown: this.handleKeyDown,
       onBlur: this.onBlur,
-      onFocus: this.onFocus,
-      style: styles.input
+      onFocus: this.onFocus
     };
 
     return (
       <div style={this.props.style} id="chips-wrapper" >
         {this.renderChips()}
         <Autosuggest
+          theme={theme}
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -163,6 +162,47 @@ class Chips extends Component {
   }
 }
 
+let theme = {
+  container:{
+    flex: 1,
+  },
+  containerOpen: {
+
+  },
+  input: {
+    border: 'none',
+    outline: 'none',
+    boxSizing: 'border-box',
+    width: '100%',
+    padding: 5,
+  },
+  suggestionsContainer: {
+
+  },
+  suggestionsList: {
+    position: 'absolute',
+    border: '1px solid #ccc',
+    left: 0,
+    top: '100%',
+    width: '100%',
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+  },
+  suggestion: {
+    padding: '5px 15px'
+  },
+  suggestionFocused: {
+    background: 'rgba(53, 181, 229, 0.5)'
+  },
+  sectionContainer: {
+
+  },
+  sectionTitle: {
+
+  },
+}
+
 
 
 let styles = {
@@ -170,11 +210,6 @@ let styles = {
   //   border: 'solid 1px #ccc'
   // },
   input: {
-    border: "0",
-    outline: "none",
-    boxSizing: "border-box",
-    width: "100%",
-    padding: 5,
   },
   wrapper: {
     display: "block",
