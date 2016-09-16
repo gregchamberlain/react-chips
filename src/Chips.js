@@ -31,7 +31,7 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
-    if (!this.props.autoCompleteOnly && (e.keyCode === 13 || e.keyCode === 9)) {
+    if (!this.props.fromSuggestionOnly && (e.keyCode === 13 || e.keyCode === 9)) {
       e.preventDefault();
       this.addChip(this.state.value);
     }
@@ -96,9 +96,9 @@ class Chips extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const { suggestions, listFilter } = this.props;
+    const { suggestions, suggestionsFilter } = this.props;
     this.setState({
-      suggestions: this.getItems().filter(opts => listFilter(opts, value))
+      suggestions: this.getItems().filter(opts => suggestionsFilter(opts, value))
     });
   }
 
@@ -107,7 +107,7 @@ class Chips extends Component {
   }
 
   onChange = (e, { newValue }) => {
-    if (!this.props.autoCompleteOnly && newValue.indexOf(',') !== -1) {
+    if (!this.props.fromSuggestionOnly && newValue.indexOf(',') !== -1) {
       let chips = newValue.split(",").map((val) => val.trim()).filter((val) => val !== "");
       chips.forEach(chip => {
         this.addChip(chip)
@@ -154,14 +154,14 @@ Chips.propTypes = {
   placeholder: PropTypes.string,
   theme: PropTypes.object,
   suggestions: PropTypes.array,
-  autoCompleteOnly: PropTypes.bool,
+  fromSuggestionOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
   getSuggestionValue: PropTypes.func,
   onChange: PropTypes.func,
   renderChip: PropTypes.func,
   renderSuggestion: PropTypes.func,
-  listFilter: PropTypes.func,
+  suggestionsFilter: PropTypes.func,
   getChipValue: PropTypes.func,
 };
 
@@ -169,14 +169,14 @@ Chips.defaultProps = {
   placeholder: '',
   theme: theme,
   suggestions: [],
-  autoCompleteOnly: false,
+  fromSuggestionOnly: false,
   uniqueChips: true,
   getSuggestionValue: s => s,
   chips: [],
   onChange: () => {},
   renderChip: (value) => (<Chip>{value}</Chip>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
-  listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
+  suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,
 };
 export default Radium(Chips);
