@@ -31,7 +31,7 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
-    if (!this.props.fromSuggestionOnly && (e.keyCode === 13 || e.keyCode === 9)) {
+    if (!this.props.fromSuggestionsOnly && (e.keyCode === 13 || e.keyCode === 9)) {
       e.preventDefault();
       this.addChip(this.state.value);
     }
@@ -107,7 +107,7 @@ class Chips extends Component {
   }
 
   onChange = (e, { newValue }) => {
-    if (!this.props.fromSuggestionOnly && newValue.indexOf(',') !== -1) {
+    if (!this.props.fromSuggestionsOnly && newValue.indexOf(',') !== -1) {
       let chips = newValue.split(",").map((val) => val.trim()).filter((val) => val !== "");
       chips.forEach(chip => {
         this.addChip(chip)
@@ -154,7 +154,7 @@ Chips.propTypes = {
   placeholder: PropTypes.string,
   theme: PropTypes.object,
   suggestions: PropTypes.array,
-  fromSuggestionOnly: PropTypes.bool,
+  fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
   getSuggestionValue: PropTypes.func,
@@ -169,7 +169,7 @@ Chips.defaultProps = {
   placeholder: '',
   theme: theme,
   suggestions: [],
-  fromSuggestionOnly: false,
+  fromSuggestionsOnly: false,
   uniqueChips: true,
   getSuggestionValue: s => s,
   chips: [],

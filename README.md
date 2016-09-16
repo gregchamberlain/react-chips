@@ -25,7 +25,7 @@ document.getElementById('root'))
 |placeholder|string|n/a|The placeholder to populate the input with|
 |theme|object|[theme](src/theme.js)|A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
 |suggestions|array|[]|Data to fill the autocomplete list with|
-|fromSuggestionOnly|bool|false|Only allow chips to be added from the suggestions list|
+|fromSuggestionsOnly|bool|false|Only allow chips to be added from the suggestions list|
 |uniqueChips|bool|true|Only allow one chip for each object|
 |chips|array|[]|Default chips to fill the component with|
 |getSuggestionValue|func|val => val|The value to show in the input when a suggestion is selected|
