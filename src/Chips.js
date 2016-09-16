@@ -3,6 +3,7 @@ import Autocomplete from 'react-autocomplete';
 import Autosuggest from 'react-autosuggest';
 import Radium from 'radium';
 
+import theme from './theme';
 import Chip from './Chip';
 import { defaultStyles } from './Styles'
 
@@ -19,21 +20,7 @@ class Chips extends Component {
   }
 
   componentDidMount = () => {
-    // let input = document.getElementById('autocomplete-input');
     this.chips = document.getElementById('chips-wrapper');
-    // input.addEventListener('focus', (e) => {
-    //   chips.focus();
-    // });
-    // input.addEventListener('blur', (e) => {
-    //   chips.blur();
-    // });
-    // input.addEventListener('keydown', (e) => {
-    //   if (e.keyCode === 8) {
-    //     this.onBackspace();
-    //   } else if (this.state.chipSelected) {
-    //     this.setState({chipSelected: false});
-    //   }
-    // });
   }
 
   onBlur = e => {
@@ -45,6 +32,10 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
+    if (!this.props.autoCompleteOnly && (e.keyCode === 13 || e.keyCode === 9)) {
+      e.preventDefault();
+      this.addChip(this.state.value);
+    }
     if (e.keyCode === 8) {
       this.onBackspace();
     } else if (this.state.chipSelected) {
@@ -65,24 +56,13 @@ class Chips extends Component {
     }
   }
 
-  onAutocompleteChange = (value) => {
-    if (!this.props.autoCompleteOnly && value.indexOf(',') !== -1) {
-      let chips = value.split(",").map((val) => val.trim()).filter((val) => val !== "");
-      chips.forEach(chip => {
-        this.addChip(chip)
-      });
-    } else {
-      this.setState({value})
-    }
-  }
-
-  addChip = (e, { suggestion }) => {
+  addChip = (value) => {
     // let newChip = this.props.getChipValue(object === undefined ? value : object)
-    if (this.props.uniqueChips && this.state.chips.indexOf(suggestion) !== -1) {
+    if (this.props.uniqueChips && this.state.chips.indexOf(value) !== -1) {
       this.setState({value: ""});
       return;
     }
-    let chips = [...this.state.chips, suggestion]
+    let chips = [...this.state.chips, value]
     this.setState({chips, value: ""})
     this.props.onChange(this.state.chips);
   }
@@ -127,16 +107,24 @@ class Chips extends Component {
     this.setState({suggestions: []})
   }
 
-  onChange = (e, { newValue}) => {
-    this.setState({value: newValue});
+  onChange = (e, { newValue }) => {
+    if (!this.props.autoCompleteOnly && newValue.indexOf(',') !== -1) {
+      let chips = newValue.split(",").map((val) => val.trim()).filter((val) => val !== "");
+      chips.forEach(chip => {
+        this.addChip(chip)
+      });
+    } else {
+      this.setState({value: newValue});
+    }
   }
 
   render() {
 
     const { value, suggestions } = this.state;
+    const { placeholder } = this.props;
 
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder,
       value,
       onChange: this.onChange,
       onKeyDown: this.handleKeyDown,
@@ -148,61 +136,19 @@ class Chips extends Component {
       <div style={this.props.style} id="chips-wrapper" >
         {this.renderChips()}
         <Autosuggest
-          theme={theme}
+          theme={this.props.theme}
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           renderSuggestion={item => <span>{item}</span>}
           inputProps={inputProps}
           getSuggestionValue={sugg => sugg}
-          onSuggestionSelected={this.addChip}
+          onSuggestionSelected={(e, {suggestion}) => this.addChip(suggestion)}
         />
       </div>
     );
   }
 }
-
-let theme = {
-  container:{
-    flex: 1,
-  },
-  containerOpen: {
-
-  },
-  input: {
-    border: 'none',
-    outline: 'none',
-    boxSizing: 'border-box',
-    width: '100%',
-    padding: 5,
-  },
-  suggestionsContainer: {
-
-  },
-  suggestionsList: {
-    position: 'absolute',
-    border: '1px solid #ccc',
-    left: 0,
-    top: '100%',
-    width: '100%',
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-  },
-  suggestion: {
-    padding: '5px 15px'
-  },
-  suggestionFocused: {
-    background: 'rgba(53, 181, 229, 0.5)'
-  },
-  sectionContainer: {
-
-  },
-  sectionTitle: {
-
-  },
-}
-
 
 
 let styles = {
@@ -235,7 +181,9 @@ let inputProps = {
 }
 
 Chips.propTypes = {
+  placeholder: PropTypes.string,
   style: PropTypes.object,
+  theme: PropTypes.object,
   autoCompleteData: PropTypes.array,
   autoCompleteOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
@@ -248,6 +196,8 @@ Chips.propTypes = {
 };
 
 Chips.defaultProps = {
+  placeholder: '',
+  theme: theme,
   style: defaultStyles.wrapper,
   autoCompleteData: [],
   autoCompleteOnly: false,
