@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import Autocomplete from 'react-autocomplete';
 import Autosuggest from 'react-autosuggest';
 import Radium from 'radium';
+import themeable from 'react-themeable';
 
 import theme from './theme';
 import Chip from './Chip';
-import { defaultStyles } from './Styles'
 
 class Chips extends Component {
 
@@ -67,7 +66,7 @@ class Chips extends Component {
     this.props.onChange(this.state.chips);
   }
 
-  removeChip = (idx) => {
+  removeChip = idx => () => {
     let { chips } = this.state;
     let left = chips.slice(0, idx);
     let right = chips.slice(idx + 1);
@@ -80,7 +79,7 @@ class Chips extends Component {
       return (
         React.cloneElement(this.props.renderChip(chip), {
           selected: this.state.chipSelected && idx === this.state.chips.length - 1,
-          onRemove: this.removeChip,
+          onRemove: this.removeChip(idx),
           index: idx,
           key: `chip${idx}`,
         })
@@ -90,14 +89,14 @@ class Chips extends Component {
 
   getItems = () => {
     if (this.props.uniqueChips) {
-      return this.props.autoCompleteData.filter(item => this.state.chips.indexOf(this.props.getChipValue(item)) === -1);
+      return this.props.suggestions.filter(item => this.state.chips.indexOf(this.props.getChipValue(item)) === -1);
     } else {
-      return this.props.autoCompleteData;
+      return this.props.suggestions;
     }
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const { autoCompleteData, listFilter } = this.props;
+    const { suggestions, listFilter } = this.props;
     this.setState({
       suggestions: this.getItems().filter(opts => listFilter(opts, value))
     });
@@ -121,7 +120,8 @@ class Chips extends Component {
   render() {
 
     const { value, suggestions } = this.state;
-    const { placeholder, renderSuggestion } = this.props;
+    const { placeholder, renderSuggestion, getSuggestionValue } = this.props;
+    const themr = themeable(this.props.theme);
 
     const inputProps = {
       placeholder,
@@ -133,7 +133,7 @@ class Chips extends Component {
     };
 
     return (
-      <div style={this.props.style} id="chips-wrapper" >
+      <div {...themr(200, 'chipsContainer')} id="chips-wrapper" >
         {this.renderChips()}
         <Autosuggest
           theme={this.props.theme}
@@ -142,7 +142,7 @@ class Chips extends Component {
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
-          getSuggestionValue={sugg => sugg}
+          getSuggestionValue={getSuggestionValue}
           onSuggestionSelected={(e, {suggestion}) => this.addChip(suggestion)}
         />
       </div>
@@ -152,12 +152,12 @@ class Chips extends Component {
 
 Chips.propTypes = {
   placeholder: PropTypes.string,
-  style: PropTypes.object,
   theme: PropTypes.object,
-  autoCompleteData: PropTypes.array,
+  suggestions: PropTypes.array,
   autoCompleteOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
+  getSuggestionValue: PropTypes.func,
   onChange: PropTypes.func,
   renderChip: PropTypes.func,
   renderSuggestion: PropTypes.func,
@@ -168,13 +168,13 @@ Chips.propTypes = {
 Chips.defaultProps = {
   placeholder: '',
   theme: theme,
-  style: defaultStyles.wrapper,
-  autoCompleteData: [],
+  suggestions: [],
   autoCompleteOnly: false,
   uniqueChips: true,
+  getSuggestionValue: s => s,
   chips: [],
   onChange: () => {},
-  renderChip: (value) => (<Chip value={value}/>),
+  renderChip: (value) => (<Chip>{value}</Chip>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,

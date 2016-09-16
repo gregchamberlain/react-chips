@@ -13,7 +13,7 @@ import CustomChip from './CustomChip'
 
 render(
   <Chips
-    autoCompleteData={["Hello", "Goodbye", "Auvua", "Happy", "Hola", "Holla"]}
+    suggestions={["Hello", "Goodbye", "Auvua", "Happy", "Hola", "Holla"]}
     autoCompleteOnly={true}
     />
 ,document.getElementById("root"))

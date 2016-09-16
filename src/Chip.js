@@ -1,50 +1,29 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Radium from 'radium';
 import themeable from 'react-themeable';
+import { chipTheme } from './theme';
 
-import { defaultStyles } from './Styles';
-
-class Chip extends Component {
-
-  onRemoveClicked = (e) => {
-    this.props.onRemove(this.props.index);
-  }
-
-  render() {
-
-    const { style, selected, theme } = this.props;
-
-    return (
-      <div style={selected ? {...style.default, ...style.selected} : style.default}>
-        {this.props.value}
-        <span
-          style={styles.close}
-          onClick={this.onRemoveClicked}> &times;</span>
-      </div>
-    );
-  }
+const Chip = ({ selected, theme, onRemove, children }) => {
+  const themr = themeable(theme);
+  return (
+    <div {...themr(1, 'chip', selected  ? 'chipSelected' : '')}>
+      {children}
+      <span
+        {...themr(2, 'chipRemove')}
+        onClick={onRemove}> &times;</span>
+    </div>
+  );
 }
 
 Chip.propTypes = {
-  style: PropTypes.object,
+  theme: PropTypes.object,
   selected: PropTypes.bool,
   onRemove: PropTypes.func,
 }
 
 Chip.defaultProps = {
+  theme: chipTheme,
   selected: false,
-  style: defaultStyles.chip,
 }
-
-let styles = {
-  close: {
-    fontWeight: "bold",
-    cursor: "pointer",
-    ':hover': {
-      color: 'red',
-    },
-  }
-}
-
 
 export default Radium(Chip);
