@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Radium from 'radium';
+import themeable from 'react-themeable';
 
 import { defaultStyles } from './Styles';
 
@@ -11,7 +12,7 @@ class Chip extends Component {
 
   render() {
 
-    let { style, selected } = this.props;
+    const { style, selected, theme } = this.props;
 
     return (
       <div style={selected ? {...style.default, ...style.selected} : style.default}>

@@ -25,7 +25,7 @@ document.getElementById('root'))
 |chips|array|[]|Default chips to fill the component with|
 |onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
 |renderChip|func|utils.renderChip|For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
-|renderListItem|func|utils.renderListItem|For custom autocomplete list item usage. A function that passes the value and highlighted state as arguments, must return an element to render for each list item.|
+|renderSuggestion|func|utils.renderSuggestion|For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
 |listFilter|func|utils.listFilter|A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
 |getChipValue|func|utils.getChipValue|A function used to change the value that is passed into each chip.|
 

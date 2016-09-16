@@ -121,7 +121,7 @@ class Chips extends Component {
   render() {
 
     const { value, suggestions } = this.state;
-    const { placeholder } = this.props;
+    const { placeholder, renderSuggestion } = this.props;
 
     const inputProps = {
       placeholder,
@@ -140,7 +140,7 @@ class Chips extends Component {
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          renderSuggestion={item => <span>{item}</span>}
+          renderSuggestion={renderSuggestion}
           inputProps={inputProps}
           getSuggestionValue={sugg => sugg}
           onSuggestionSelected={(e, {suggestion}) => this.addChip(suggestion)}
@@ -148,36 +148,6 @@ class Chips extends Component {
       </div>
     );
   }
-}
-
-
-let styles = {
-  // menu: {
-  //   border: 'solid 1px #ccc'
-  // },
-  input: {
-  },
-  wrapper: {
-    display: "block",
-    margin: 2.5,
-    flexGrow: 1,
-  },
-  menu: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    borderRadius: '3px',
-    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-    background: 'rgba(255, 255, 255, 0.9)',
-    padding: '2px 0',
-    fontSize: '90%',
-    overflow: 'auto',
-    maxHeight: '100px',
-  }
-}
-
-let inputProps = {
-  id: "autocomplete-input", style: styles.input
 }
 
 Chips.propTypes = {
@@ -190,7 +160,7 @@ Chips.propTypes = {
   chips: PropTypes.array,
   onChange: PropTypes.func,
   renderChip: PropTypes.func,
-  renderListItem: PropTypes.func,
+  renderSuggestion: PropTypes.func,
   listFilter: PropTypes.func,
   getChipValue: PropTypes.func,
 };
@@ -205,15 +175,7 @@ Chips.defaultProps = {
   chips: [],
   onChange: () => {},
   renderChip: (value) => (<Chip value={value}/>),
-  renderListItem: (item, isHighlighted) => (
-    <div
-      style={isHighlighted ? {
-        ...defaultStyles.listItem.default,
-        ...defaultStyles.listItem.highlighted
-      } : defaultStyles.listItem.default}
-      key={JSON.stringify(item)}
-    >{item}</div>
-  ),
+  renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   listFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,
 };
