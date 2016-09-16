@@ -1,5 +1,5 @@
 import React from 'react';
-import Chips, { Chip, Styles } from '../src'
+import Chips, { Chip } from '../src'
 import CustomChip from './CustomChip'
 
 const data = [
@@ -21,10 +21,10 @@ const CustomExample = () => (
     renderChip={(item) => (
       <CustomChip image={item.image}>{item.name}</CustomChip>
     )}
-    fromSuggestionOnly={true}
+    fromSuggestionsOnly={true}
     renderSuggestion={(item, { query }) => (
       <div
-        style={Styles.listItem.default}
+        style={style}
         key={item.name}>
         <img src={item.image} width={24} height={24} style={{margin: 5}}/>{item.name}
       </div>
@@ -35,5 +35,12 @@ const CustomExample = () => (
     getSuggestionValue={suggestion => suggestion.name}
   	/>
 );
+
+const style = {
+  display: "flex",
+  alignItems: "center",
+  padding: '2px 6px',
+  cursor: 'default'
+}
 
 export default CustomExample;

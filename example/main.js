@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import Chips, { Styles, Chip } from '../dist/bundle'
-import Chips, { Styles, Chip } from '../src'
+import Chips, { Chip } from '../src'
 import CustomChip from './CustomChip'
 import BasicExample from './basic';
 import CustomExample from './custom';
