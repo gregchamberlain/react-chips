@@ -19,21 +19,37 @@ class Chips extends Component {
   }
 
   componentDidMount = () => {
-    let input = document.getElementById('autocomplete-input');
-    let chips = document.getElementById('chips-wrapper');
-    input.addEventListener('focus', (e) => {
-      chips.focus();
-    });
-    input.addEventListener('blur', (e) => {
-      chips.blur();
-    });
-    input.addEventListener('keydown', (e) => {
-      if (e.keyCode === 8) {
-        this.onBackspace();
-      } else if (this.state.chipSelected) {
-        this.setState({chipSelected: false});
-      }
-    });
+    // let input = document.getElementById('autocomplete-input');
+    this.chips = document.getElementById('chips-wrapper');
+    // input.addEventListener('focus', (e) => {
+    //   chips.focus();
+    // });
+    // input.addEventListener('blur', (e) => {
+    //   chips.blur();
+    // });
+    // input.addEventListener('keydown', (e) => {
+    //   if (e.keyCode === 8) {
+    //     this.onBackspace();
+    //   } else if (this.state.chipSelected) {
+    //     this.setState({chipSelected: false});
+    //   }
+    // });
+  }
+
+  onBlur = e => {
+    this.chips.focus();
+  }
+
+  onFocus = e => {
+    this.chips.blur();
+  }
+
+  handleKeyDown = e => {
+    if (e.keyCode === 8) {
+      this.onBackspace();
+    } else if (this.state.chipSelected) {
+      this.setState({chipSelected: false});
+    }
   }
 
   onBackspace = (code) => {
@@ -123,7 +139,11 @@ class Chips extends Component {
     const inputProps = {
       placeholder: 'Type a programming language',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      onKeyDown: this.handleKeyDown,
+      onBlur: this.onBlur,
+      onFocus: this.onFocus,
+      style: styles.input
     };
 
     return (
@@ -138,18 +158,6 @@ class Chips extends Component {
           getSuggestionValue={sugg => sugg}
           onSuggestionSelected={this.addChip}
         />
-        {/* <Autocomplete
-          value={this.state.value}
-          inputProps={inputProps}
-          wrapperStyle={styles.wrapper}
-          menuStyle={styles.menu}
-          items={this.getItems()}
-          getItemValue={() => ""}
-          shouldItemRender={this.props.listFilter}
-          onChange={(event, value) => this.onAutocompleteChange(value)}
-          onSelect={this.addChip}
-          renderItem={this.props.renderListItem}
-          /> */}
       </div>
     );
   }
