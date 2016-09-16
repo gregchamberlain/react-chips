@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import Autocomplete from 'react-autocomplete'
+import React, { Component, PropTypes } from 'react';
+import Autocomplete from 'react-autocomplete';
+import Autosuggest from 'react-autosuggest';
 import Radium from 'radium';
 
 import Chip from './Chip';
@@ -13,6 +14,7 @@ class Chips extends Component {
       value: "",
       chips: props.chips,
       chipSelected: false,
+      suggestions: []
     };
   }
 
@@ -58,13 +60,13 @@ class Chips extends Component {
     }
   }
 
-  addChip = (value, object) => {
-    let newChip = this.props.getChipValue(object === undefined ? value : object)
-    if (this.props.uniqueChips && this.state.chips.indexOf(newChip) !== -1) {
+  addChip = (e, { suggestion }) => {
+    // let newChip = this.props.getChipValue(object === undefined ? value : object)
+    if (this.props.uniqueChips && this.state.chips.indexOf(suggestion) !== -1) {
       this.setState({value: ""});
       return;
     }
-    let chips = [...this.state.chips, newChip]
+    let chips = [...this.state.chips, suggestion]
     this.setState({chips, value: ""})
     this.props.onChange(this.state.chips);
   }
@@ -98,11 +100,45 @@ class Chips extends Component {
     }
   }
 
+  onSuggestionsFetchRequested = ({ value }) => {
+    console.log(value);
+    const { autoCompleteData, listFilter } = this.props;
+    this.setState({
+      suggestions: autoCompleteData.filter(opts => listFilter(opts, value))
+    });
+  }
+
+  onSuggestionsClearRequested = () => {
+    this.setState({suggestions: []})
+  }
+
+  onChange = (e, { newValue}) => {
+    this.setState({value: newValue});
+  }
+
   render() {
+
+    const { value, suggestions } = this.state;
+
+    const inputProps = {
+      placeholder: 'Type a programming language',
+      value,
+      onChange: this.onChange
+    };
+
     return (
       <div style={this.props.style} id="chips-wrapper" >
         {this.renderChips()}
-        <Autocomplete
+        <Autosuggest
+          suggestions={this.state.suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          renderSuggestion={item => <span>{item}</span>}
+          inputProps={inputProps}
+          getSuggestionValue={sugg => sugg}
+          onSuggestionSelected={this.addChip}
+        />
+        {/* <Autocomplete
           value={this.state.value}
           inputProps={inputProps}
           wrapperStyle={styles.wrapper}
@@ -113,7 +149,7 @@ class Chips extends Component {
           onChange={(event, value) => this.onAutocompleteChange(value)}
           onSelect={this.addChip}
           renderItem={this.props.renderListItem}
-          />
+          /> */}
       </div>
     );
   }
