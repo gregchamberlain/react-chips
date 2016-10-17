@@ -45,10 +45,12 @@ class Chips extends Component {
   onBackspace = (code) => {
     if (this.state.value === "" && this.state.chips.length > 0) {
       if (this.state.chipSelected) {
+        const nextChips = this.state.chips.slice(0, -1);
         this.setState({
           chipSelected: false,
-          chips: this.state.chips.slice(0,-1),
-        })
+          chips: nextChips,
+        });
+        this.props.onChange(nextChips);
       } else {
         this.setState({chipSelected: true})
       }
