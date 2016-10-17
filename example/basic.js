@@ -1,5 +1,5 @@
 import React from 'react';
-import Chips, { Chip } from '../src'
+import Chips, { Chip } from '../lib'
 
 const data = [
   'JavaScript',
@@ -15,6 +15,7 @@ const data = [
 
 const BasicExample = () => (
   <Chips
+    onChange={chips => console.log(chips)}
     placeholder="Type a Programming Language"
     suggestions={data}
     fromSuggestionOnly={true} />

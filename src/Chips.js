@@ -31,9 +31,9 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
-    if (!this.props.fromSuggestionsOnly && (e.keyCode === 13 || e.keyCode === 9)) {
+    if (!this.props.fromSuggestionsOnly && e.keyCode === 9) {
       e.preventDefault();
-      this.addChip(this.state.value);
+      if (this.state.value) this.addChip(this.state.value);
     }
     if (e.keyCode === 8) {
       this.onBackspace();
@@ -56,22 +56,22 @@ class Chips extends Component {
   }
 
   addChip = (value) => {
-    // let newChip = this.props.getChipValue(object === undefined ? value : object)
     if (this.props.uniqueChips && this.state.chips.indexOf(value) !== -1) {
       this.setState({value: ""});
       return;
     }
     let chips = [...this.state.chips, value]
     this.setState({chips, value: ""})
-    this.props.onChange(this.state.chips);
+    this.props.onChange(chips);
   }
 
   removeChip = idx => () => {
     let { chips } = this.state;
     let left = chips.slice(0, idx);
     let right = chips.slice(idx + 1);
-    this.setState({chips: [...left, ...right]});
-    this.props.onChange(this.state.chips);
+    const nextChips = [...left, ...right];
+    this.setState({chips: nextChips});
+    this.props.onChange(nextChips);
   }
 
   renderChips = () => {
