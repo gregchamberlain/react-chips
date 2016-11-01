@@ -1,5 +1,7 @@
 # react-chips [![npm version](https://badge.fury.io/js/react-chips.svg)](https://badge.fury.io/js/react-chips)
 
+![Example](assets/example.gif)
+
 ## Getting Started
 
 ```

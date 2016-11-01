@@ -7,9 +7,9 @@ import CustomExample from './custom';
 
 render(
   <div>
-    <h1>Basic</h1>
+    {/* <h1>Basic</h1> */}
     <BasicExample />
-    <h1>Custom</h1>
-    <CustomExample />
+    {/* <h1>Custom</h1> */}
+    {/* <CustomExample /> */}
   </div>
 ,document.getElementById("root"))
