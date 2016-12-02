@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "react": "^15.3.0",
-    "react-chips": "^0.1.1",
+    "react-chips": "^0.2.3",
     "react-dom": "^15.3.0"
   }
 }
