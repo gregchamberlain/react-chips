@@ -1,16 +1,28 @@
-var getConfig = require('hjs-webpack');
+var path = require('path');
+var webpack = require('webpack');
 
-var config = getConfig({
-  isDev: process.env.NODE_ENV !== "production",
-  in: process.env.NODE_ENV !== "production"?'example/main.js':'src/index.js',
-  out: 'dist',
+module.exports = {
+  devtool: 'cheap-module-source-map',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    './site/src/index.js'
+  ],
   output: {
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'site'),
+    filename: 'bundle.js',
+    publicPath: '/site/'
   },
-  clearBeforeBuild: true
-});
-
-if (process.env.NODE_ENV === "production"){
-  config.output.libraryTarget = "commonjs2";
-}
-module.exports = config;
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+  ],
+  module: {
+    loaders: [{
+      test: /\.js?$/,
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }]
+  }
+};

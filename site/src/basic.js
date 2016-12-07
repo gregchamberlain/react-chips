@@ -1,5 +1,5 @@
 import React from 'react';
-import Chips, { Chip } from '../lib'
+import Chips, { Chip } from '../../src'
 
 const data = [
   'JavaScript',
