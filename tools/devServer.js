@@ -13,6 +13,9 @@ app.use(devMiddleware(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath,
   historyApiFallback: true,
+  stats: {
+    colors: true
+  }
 }));
 
 app.use(hotMiddleware(compiler));
