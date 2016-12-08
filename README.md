@@ -1,6 +1,11 @@
 # react-chips [![npm version](https://badge.fury.io/js/react-chips.svg)](https://badge.fury.io/js/react-chips)
 
+A controlled React input for arrays of data.
 ![Example](assets/example.gif)
+
+**Chip**
+A chip is a component used to represent an arbitrary data object.
+
 
 ## Getting Started
 
@@ -9,29 +14,49 @@ npm install --save react-chips
 ```
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react';
 import Chips, { Chip } from '../src'
 
-render(
-  <Chips
-    suggestions={["Your", "Data", "Here"]}
-     />,
-document.getElementById('root'))
+class YourComponent extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      chips: []
+    }
+  }
+
+  onChange = chips => {
+    this.setState({ chips });
+  }
+
+  render() {
+    return (
+      <div>
+        <Chips
+          value={this.state.chips}
+          onChange={this.onChange}
+          suggestions={["Your", "Data", "Here"]}
+
+        />
+      </div>
+    );
+  }
+}
 ```
 
 ## Chips
 
 |Property|Type|Default|Description|
 |--------|----|-------|-----------|
+|value|`Array`|n/a|An array of data that represents the value of the chips|
+|onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
 |placeholder|string|n/a|The placeholder to populate the input with|
 |theme|object|[theme](src/theme.js)|A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
 |suggestions|array|[]|Data to fill the autocomplete list with|
 |fromSuggestionsOnly|bool|false|Only allow chips to be added from the suggestions list|
 |uniqueChips|bool|true|Only allow one chip for each object|
-|chips|array|[]|Default chips to fill the component with|
 |getSuggestionValue|func|val => val|The value to show in the input when a suggestion is selected|
-|onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
 |renderChip|func|utils.renderChip|For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
 |renderSuggestion|func|utils.renderSuggestion|For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
 |suggestionsFilter|func|utils.suggestionsFilter|A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
