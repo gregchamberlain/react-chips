@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Chips, { Chip } from '../../src'
 import CustomChip from './CustomChip'
 
@@ -14,27 +14,45 @@ const data = [
   {name: 'Go', image: '' },
 ];
 
-const CustomExample = () => (
-  <Chips
-    placeholder="Type a Programming Language"
-  	suggestions={data}
-    renderChip={(item) => (
-      <CustomChip image={item.image}>{item.name}</CustomChip>
-    )}
-    fromSuggestionsOnly={true}
-    renderSuggestion={(item, { query }) => (
-      <div
-        style={style}
-        key={item.name}>
-        <img src={item.image} width={24} height={24} style={{margin: 5}}/>{item.name}
-      </div>
-    )}
-    suggestionsFilter={(opt, val) => (
-      opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
-    )}
-    getSuggestionValue={suggestion => suggestion.name}
-  	/>
-);
+class CustomExample extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: []
+    }
+  }
+
+  onChange = value => {
+    this.setState({ value });
+  }
+
+  render() {
+    return (
+      <Chips
+        value={this.state.value}
+        onChange={this.onChange}
+        placeholder="Type a Programming Language"
+      	suggestions={data}
+        renderChip={(item) => (
+          <CustomChip image={item.image}>{item.name}</CustomChip>
+        )}
+        fromSuggestionsOnly={true}
+        renderSuggestion={(item, { query }) => (
+          <div
+            style={style}
+            key={item.name}>
+            <img src={item.image} width={24} height={24} style={{margin: 5}}/>{item.name}
+          </div>
+        )}
+        suggestionsFilter={(opt, val) => (
+          opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
+        )}
+        getSuggestionValue={suggestion => suggestion.name}
+      	/>
+    );
+  }
+}
 
 const style = {
   display: "flex",

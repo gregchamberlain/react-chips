@@ -12,7 +12,6 @@ class Chips extends Component {
     super(props)
     this.state = {
       value: "",
-      chips: props.chips,
       chipSelected: false,
       suggestions: []
     };
@@ -43,9 +42,9 @@ class Chips extends Component {
   }
 
   onBackspace = (code) => {
-    if (this.state.value === "" && this.state.chips.length > 0) {
+    if (this.state.value === "" && this.props.value.length > 0) {
       if (this.state.chipSelected) {
-        const nextChips = this.state.chips.slice(0, -1);
+        const nextChips = this.props.value.slice(0, -1);
         this.setState({
           chipSelected: false,
           chips: nextChips,
@@ -58,29 +57,27 @@ class Chips extends Component {
   }
 
   addChip = (value) => {
-    if (this.props.uniqueChips && this.state.chips.indexOf(value) !== -1) {
+    if (this.props.uniqueChips && this.props.value.indexOf(value) !== -1) {
       this.setState({value: ""});
       return;
     }
-    let chips = [...this.state.chips, value]
-    this.setState({chips, value: ""})
+    let chips = [...this.props.value, value]
     this.props.onChange(chips);
+    this.setState({ value: "" })
   }
 
   removeChip = idx => () => {
-    let { chips } = this.state;
-    let left = chips.slice(0, idx);
-    let right = chips.slice(idx + 1);
+    let left = this.props.value.slice(0, idx);
+    let right = this.props.value.slice(idx + 1);
     const nextChips = [...left, ...right];
-    this.setState({chips: nextChips});
     this.props.onChange(nextChips);
   }
 
   renderChips = () => {
-    return this.state.chips.map((chip, idx) => {
+    return this.props.value.map((chip, idx) => {
       return (
         React.cloneElement(this.props.renderChip(chip), {
-          selected: this.state.chipSelected && idx === this.state.chips.length - 1,
+          selected: this.state.chipSelected && idx === this.props.value.length - 1,
           onRemove: this.removeChip(idx),
           index: idx,
           key: `chip${idx}`,
@@ -91,7 +88,7 @@ class Chips extends Component {
 
   getItems = () => {
     if (this.props.uniqueChips) {
-      return this.props.suggestions.filter(item => this.state.chips.indexOf(this.props.getChipValue(item)) === -1);
+      return this.props.suggestions.filter(item => this.props.value.indexOf(this.props.getChipValue(item)) === -1);
     } else {
       return this.props.suggestions;
     }
