@@ -3,8 +3,8 @@ const theme = {
     display: "flex",
     position: "relative",
     border: "1px solid #ccc",
+    backgroundColor: '#fff',
     font: "13.33333px Arial",
-    zIndex: 1,
     minHeight: 24,
     alignItems: "center",
     flexWrap: "wrap",
@@ -34,6 +34,7 @@ const theme = {
   suggestionsList: {
     position: 'absolute',
     border: '1px solid #ccc',
+    zIndex: 10,
     left: 0,
     top: '100%',
     width: '100%',

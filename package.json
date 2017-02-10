@@ -11,7 +11,9 @@
     "start": "node tools/devServer.js",
     "build": "NODE_ENV=production ./tools/build.sh",
     "buildSite": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -38,7 +40,8 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "@kadira/storybook": "^2.21.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.3.0"

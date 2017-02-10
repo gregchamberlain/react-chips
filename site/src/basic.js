@@ -34,6 +34,7 @@ class BasicExample extends Component {
         onChange={this.onChange}
         placeholder="Type a Programming Language"
         suggestions={data}
+        shouldRenderSuggestions={value => value.length >= 0}
         fromSuggestionsOnly={false} />
     );
   }

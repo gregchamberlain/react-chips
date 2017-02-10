@@ -17,22 +17,18 @@ class Chips extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.chips = document.getElementById('chips-wrapper');
-  }
-
   onBlur = e => {
-    this.chips.focus();
+    this.refs.wrapper.focus();
   }
 
   onFocus = e => {
-    this.chips.blur();
+    this.refs.wrapper.blur();
   }
 
   handleKeyDown = e => {
     if (!this.props.fromSuggestionsOnly && e.keyCode === 9) {
       e.preventDefault();
-      if (this.state.value) this.addChip(this.state.value);
+      if (this.state.value.trim()) this.addChip(this.state.value);
     }
     if (e.keyCode === 8) {
       this.onBackspace();
@@ -119,7 +115,7 @@ class Chips extends Component {
   render() {
 
     const { value, suggestions } = this.state;
-    const { placeholder, renderSuggestion, getSuggestionValue } = this.props;
+    const { placeholder, renderSuggestion, getSuggestionValue, shouldRenderSuggestions } = this.props;
     const themr = themeable(this.props.theme);
 
     const inputProps = {
@@ -132,13 +128,14 @@ class Chips extends Component {
     };
 
     return (
-      <div {...themr(200, 'chipsContainer')} id="chips-wrapper" >
+      <div {...themr(200, 'chipsContainer')} ref="wrapper" >
         {this.renderChips()}
         <Autosuggest
           theme={this.props.theme}
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          shouldRenderSuggestions={shouldRenderSuggestions}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
           getSuggestionValue={getSuggestionValue}
@@ -156,6 +153,7 @@ Chips.propTypes = {
   fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   chips: PropTypes.array,
+  shouldRenderSuggestions: PropTypes.func,
   getSuggestionValue: PropTypes.func,
   onChange: PropTypes.func,
   renderChip: PropTypes.func,
