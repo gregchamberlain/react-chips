@@ -13,7 +13,7 @@
     "buildSite": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "prepublish": "npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -c .storybook -o docs"
   },
   "repository": {
     "type": "git",

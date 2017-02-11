@@ -23,7 +23,6 @@ class BasicExample extends Component {
   }
 
   onChange = value => {
-    console.log(value);
     this.setState({ value });
   }
 
@@ -32,6 +31,7 @@ class BasicExample extends Component {
       <Chips
         value={this.state.value}
         onChange={this.onChange}
+        createChipKeys={[13]}
         placeholder="Type a Programming Language"
         suggestions={data}
         shouldRenderSuggestions={value => value.length >= 0}

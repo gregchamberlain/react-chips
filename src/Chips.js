@@ -26,7 +26,7 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
-    if (!this.props.fromSuggestionsOnly && e.keyCode === 9) {
+    if (!this.props.fromSuggestionsOnly && this.props.createChipKeys.includes(e.keyCode)) {
       e.preventDefault();
       if (this.state.value.trim()) this.addChip(this.state.value);
     }
@@ -148,11 +148,12 @@ class Chips extends Component {
 
 Chips.propTypes = {
   placeholder: PropTypes.string,
+  createChipKeys: PropTypes.array,
   theme: PropTypes.object,
   suggestions: PropTypes.array,
   fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
-  chips: PropTypes.array,
+  value: PropTypes.array.isRequired,
   shouldRenderSuggestions: PropTypes.func,
   getSuggestionValue: PropTypes.func,
   onChange: PropTypes.func,
@@ -166,14 +167,16 @@ Chips.defaultProps = {
   placeholder: '',
   theme: theme,
   suggestions: [],
+  createChipKeys: [9],
   fromSuggestionsOnly: false,
   uniqueChips: true,
   getSuggestionValue: s => s,
-  chips: [],
+  value: [],
   onChange: () => {},
   renderChip: (value) => (<Chip>{value}</Chip>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,
 };
+
 export default Radium(Chips);
