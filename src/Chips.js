@@ -147,20 +147,20 @@ class Chips extends Component {
 }
 
 Chips.propTypes = {
+  value: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  createChipKeys: PropTypes.array,
   theme: PropTypes.object,
   suggestions: PropTypes.array,
   fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
-  value: PropTypes.array.isRequired,
-  shouldRenderSuggestions: PropTypes.func,
   getSuggestionValue: PropTypes.func,
-  onChange: PropTypes.func,
   renderChip: PropTypes.func,
   renderSuggestion: PropTypes.func,
   suggestionsFilter: PropTypes.func,
   getChipValue: PropTypes.func,
+  createChipKeys: PropTypes.array,
+  shouldRenderSuggestions: PropTypes.func,
 };
 
 Chips.defaultProps = {

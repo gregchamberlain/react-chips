@@ -49,8 +49,8 @@ class YourComponent extends Component {
 
 |Property|Type|Default|Description|
 |--------|----|-------|-----------|
-|value|`Array`|n/a|An array of data that represents the value of the chips|
-|onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
+|value|Array|n/a|An array of data that represents the value of the chips|
+|onChange|Function|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
 |placeholder|string|n/a|The placeholder to populate the input with|
 |theme|object|[theme](src/theme.js)|A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
 |suggestions|array|[]|Data to fill the autocomplete list with|
@@ -61,6 +61,8 @@ class YourComponent extends Component {
 |renderSuggestion|func|utils.renderSuggestion|For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
 |suggestionsFilter|func|utils.suggestionsFilter|A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
 |getChipValue|func|utils.getChipValue|A function used to change the value that is passed into each chip.|
+|createChipKeys|arr|[9]|An array of keyCodes that will create a chip with the current input when pressed. (Will not work of `fromSuggestionsOnly` is true).|
+|[`shouldRenderSuggestions`](#shouldRenderSuggestionsProp)|Function|When the input is focused this is called to determine when to show the suggestions list|
 
 ## Styles
 
@@ -80,3 +82,8 @@ You may use a custom chip component, simply return the custom component to the r
 |--------|----|-----------|
 |selected|bool|A boolean that tells the chip if it is currently selected.|
 |onRemove|func|A function to be invoked when the chip should be removed|
+
+## Props
+
+<a name="shouldRenderSuggestionsProp"></a>
+#### shouldRenderSuggestions (optional)
