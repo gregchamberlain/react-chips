@@ -47,20 +47,28 @@ class YourComponent extends Component {
 
 ## Chips
 
-|Property|Type|Default|Description|
-|--------|----|-------|-----------|
-|value|`Array`|n/a|An array of data that represents the value of the chips|
-|onChange|func|n/a|A function called when the value of chips changes, passes the chips value as an argument.|
-|placeholder|string|n/a|The placeholder to populate the input with|
-|theme|object|[theme](src/theme.js)|A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
-|suggestions|array|[]|Data to fill the autocomplete list with|
-|fromSuggestionsOnly|bool|false|Only allow chips to be added from the suggestions list|
-|uniqueChips|bool|true|Only allow one chip for each object|
-|getSuggestionValue|func|val => val|The value to show in the input when a suggestion is selected|
-|renderChip|func|utils.renderChip|For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
-|renderSuggestion|func|utils.renderSuggestion|For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
-|suggestionsFilter|func|utils.suggestionsFilter|A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
-|getChipValue|func|utils.getChipValue|A function used to change the value that is passed into each chip.|
+|Property|Type|Required|Description|
+|--------|----|:-----:|-----------|
+|`value`|Array|✓|An array of data that represents the value of the chips|
+|`onChange`|Function|✓|A function called when the value of chips changes, passes the chips value as an argument.|
+|`placeholder`|String||The placeholder to populate the input with|
+|`theme`|Object||A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
+|`suggestions`|Array||Data to fill the autocomplete list with|
+|`fromSuggestionsOnly`|Boolean||Only allow chips to be added from the suggestions list|
+|`uniqueChips`|Boolean||Only allow one chip for each object|
+|`renderChip`|Function||For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
+|`suggestionsFilter`|Function||A function that is passed an autoCompleteData item, and the current input value as arguments. Must return a boolean for if the item should be shown.|
+|`getChipValue`|Function||A function used to change the value that is passed into each chip.|
+|`createChipKeys`|Array||An array of keys/keyCodes that will create a chip with the current input value when pressed. (Will not work of `fromSuggestionsOnly` is true).|
+|`getSuggestionValue`|Function||The value to show in the input when a suggestion is selected|
+|`renderSuggestion`|Function||For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
+|`shouldRenderSuggestions`|Function||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#shouldRenderSuggestionsProp)|
+|`alwaysRenderSuggestions`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#alwaysRenderSuggestionsProp)|
+|`focusFirstSuggestion`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#focusFirstSuggestionProp)|
+|`focusInputOnSuggestionClick`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#focusInputOnSuggestionClickProp)|
+|`multiSection`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#multiSectionProp)|
+|`renderSectionTitle`|Function|✓ when multiSection={true}|See [AutoSuggest](https://github.com/moroshko/react-autosuggest#renderSectionTitleProp)|
+|`getSectionSuggestions`|Function|✓ when multiSection={true}|See [AutoSuggest](https://github.com/moroshko/react-autosuggest#getSectionSuggestionsProp)|
 
 ## Styles
 

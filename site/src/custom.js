@@ -8,10 +8,10 @@ const data = [
   {name: 'Python', image: 'http://www.iconarchive.com/download/i73027/cornmanthe3rd/plex/Other-python.ico' },
   {name: 'Java', image: 'https://cdn2.iconfinder.com/data/icons/metro-ui-dock/128/Java.png' },
   {name: 'Swift', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcNaPStsM3XwWDAgvjFfT5RFcDxuynJUJmY4lH5PSMyhphA9hA' },
-  {name: 'C++', image: '' },
-  {name: 'C', image: '' },
-  {name: 'Objective C', image: '' },
-  {name: 'Go', image: '' },
+  {name: 'C++', image: 'http://www.freeiconspng.com/uploads/c--logo-icon-0.png' },
+  {name: 'C', image: 'http://www.compindiatechnologies.com/images/icon/c.gif' },
+  {name: 'Objective C', image: 'http://2.bp.blogspot.com/-BuR1DpqQprU/U5CQ_0w2L7I/AAAAAAAABZY/H9wbfbO-kew/s1600/iOS_Objective_C.png' },
+  {name: 'Go', image: 'https://www.codemate.com/wp-content/uploads/2015/11/go-lang-icon-180x180.png' },
 ];
 
 class CustomExample extends Component {
