@@ -26,7 +26,7 @@ class Chips extends Component {
   }
 
   handleKeyDown = e => {
-    if (!this.props.fromSuggestionsOnly && this.props.createChipKeys.includes(e.keyCode)) {
+    if (!this.props.fromSuggestionsOnly && (this.props.createChipKeys.includes(e.keyCode) || this.props.createChipKeys.includes(e.key))) {
       e.preventDefault();
       if (this.state.value.trim()) this.addChip(this.state.value);
     }
@@ -115,7 +115,7 @@ class Chips extends Component {
   render() {
 
     const { value, suggestions } = this.state;
-    const { placeholder, renderSuggestion, getSuggestionValue, shouldRenderSuggestions } = this.props;
+    const { placeholder } = this.props;
     const themr = themeable(this.props.theme);
 
     const inputProps = {
@@ -131,14 +131,12 @@ class Chips extends Component {
       <div {...themr(200, 'chipsContainer')} ref="wrapper" >
         {this.renderChips()}
         <Autosuggest
+          {...this.props}
           theme={this.props.theme}
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          shouldRenderSuggestions={shouldRenderSuggestions}
-          renderSuggestion={renderSuggestion}
           inputProps={inputProps}
-          getSuggestionValue={getSuggestionValue}
           onSuggestionSelected={(e, {suggestion}) => this.addChip(suggestion)}
         />
       </div>
@@ -154,13 +152,19 @@ Chips.propTypes = {
   suggestions: PropTypes.array,
   fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
-  getSuggestionValue: PropTypes.func,
   renderChip: PropTypes.func,
-  renderSuggestion: PropTypes.func,
   suggestionsFilter: PropTypes.func,
   getChipValue: PropTypes.func,
   createChipKeys: PropTypes.array,
+  getSuggestionValue: PropTypes.func,
+  renderSuggestion: PropTypes.func,
   shouldRenderSuggestions: PropTypes.func,
+  alwaysRenderSuggestions: PropTypes.func,
+  focusFirstSuggestion: PropTypes.bool,
+  focusInputOnSuggestionClick: PropTypes.bool,
+  multiSection: PropTypes.bool,
+  renderSectionTitle: PropTypes.func,
+  getSectionSuggestions: PropTypes.func,
 };
 
 Chips.defaultProps = {

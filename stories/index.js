@@ -34,6 +34,7 @@ storiesOf('Chips', module)
       placeholder="Type a Programming Language"
       suggestions={suggestions}
       fromSuggestionsOnly={false}
+      shouldRenderSuggestions={value => true}
     />
   ))
   .add('Custom Chip', () => (
