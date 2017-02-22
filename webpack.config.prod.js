@@ -2,15 +2,17 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
   entry: './site/src/index.js',
+
   output: {
     path: path.join(__dirname, 'site'),
     filename: 'bundle.js',
   },
+
+  devtool: 'cheap-module-source-map',
+
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env':{
         'NODE_ENV': JSON.stringify('production')
@@ -22,16 +24,13 @@ module.exports = {
       }
     })
   ],
+
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js?$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'site')
-    },
-    {
-      test: /\.json?$/,
-      loaders: ['json'],
-      include: path.join(__dirname, 'site')
+      loaders: ['babel-loader'],
+      exclude: /node_modules/
     }]
   }
+  
 };

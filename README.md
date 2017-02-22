@@ -1,7 +1,7 @@
 # React Component Skeleton
 
 ## Instructions
-3. npm install
+3. yarn install
 1. Change project name/version in package.json
 3. Create you new Component
 

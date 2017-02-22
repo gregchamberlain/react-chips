@@ -2,31 +2,42 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
+
   entry: [
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
     './site/src/index.js'
   ],
+
   output: {
-    path: path.join(__dirname, 'site'),
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'site'),
     publicPath: '/site/'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
+
+  devtool: 'cheap-module-inline-source-map',
+
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js?$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'site')
-    },
-    {
-     test: /\.json?$/,
-     loaders: ['json']
+      use: ['babel-loader'],
+      exclude: /node_modules/
     }]
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
+
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    historyApiFallback: true,
+    hot: true
   }
+  
 };
+
