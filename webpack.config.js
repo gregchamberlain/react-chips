@@ -12,8 +12,8 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'site'),
-    publicPath: '/site/'
+    path: path.resolve(__dirname, 'site', 'dist'),
+    publicPath: '/site/dist/'
   },
 
   devtool: 'cheap-module-inline-source-map',
