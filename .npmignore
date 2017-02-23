@@ -1,7 +1,10 @@
-/src
-/site
-/node_modules
+/src/
+/site/
+/node_modules/
+/tests/
 .babelrc
-webpack.config.js
-.gitignore
 .eslintrc
+.gitignore
+index.html
+webpack.config.js
+webpack.config.prod.js
