@@ -1,4 +1,4 @@
-# React Chips [![npm package](https://img.shields.io/npm/v/react-chips.svg?style=flat-square)](https://www.npmjs.org/package/react-chips) [![Build Status](https://travis-ci.org/gregchamberlain/react-chips.svg?branch=master)](https://travis-ci.org/gregchamberlain/react-chips)
+# React Chips [![npm package](https://img.shields.io/npm/v/react-chips.svg?style=flat-square)](https://www.npmjs.org/package/react-chips) [![Build Status](https://img.shields.io/travis/gregchamberlain/react-chips/master.svg?style=flat-square)](https://travis-ci.org/gregchamberlain/react-chips)
 
 A controlled React input for arrays of data.
 ![Example](assets/example.gif)
