@@ -4,6 +4,7 @@ A controlled React input for arrays of data.
 ![Example](assets/example.gif)
 
 **Chip**
+
 A chip is a component used to represent an arbitrary data object.
 
 
