@@ -1,5 +1,5 @@
 {
-  "name": "react-component-skeleton",
+  "name": "react-component-boilerplate",
   "version": "0.1.0",
   "description": "A simple responsive sidebar component for React",
   "keywords": [
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregchamberlain/react-component-skeleton.git"
+    "url": "git+https://github.com/gregchamberlain/react-component-boilerplate.git"
   },
   "author": "Greg Chamberlain <gregchamberlain94@gmail.com> (https://gregchamberlain.github.io)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gregchamberlain/react-component-skeleton/issues"
+    "url": "https://github.com/gregchamberlain/react-component-boilerplate/issues"
   },
-  "homepage": "https://github.com/gregchamberlain/react-component-skeleton#readme",
+  "homepage": "https://github.com/gregchamberlain/react-component-boilerplate#readme",
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.5.2",
