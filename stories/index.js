@@ -17,7 +17,7 @@ const suggestions = [
 
 const data = [
   {name: 'JavaScript', image: 'http://i.stack.imgur.com/Mmww2.png'},
-  {name: 'Ruby', image: 'https://www.codementor.io/assets/tutorial_icon/ruby-on-rails.png' },
+  {name: 'Ruby', image: 'https://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.ruby.png' },
   {name: 'Python', image: 'http://www.iconarchive.com/download/i73027/cornmanthe3rd/plex/Other-python.ico' },
   {name: 'Java', image: 'https://cdn2.iconfinder.com/data/icons/metro-ui-dock/128/Java.png' },
   {name: 'Swift', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcNaPStsM3XwWDAgvjFfT5RFcDxuynJUJmY4lH5PSMyhphA9hA' },

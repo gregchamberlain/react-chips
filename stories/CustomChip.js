@@ -15,24 +15,26 @@ class CustomChip extends Component {
 
 let styles = {
   selected: {
-    background: "#ccc",
+    background: "#666",
   },
   container: {
     display: "flex",
     alignItems: "center",
     height: 32,
     boxSizing: 'border-box',
-    color: "#444",
-    background: "#e0e0e0",
+    color: "#eee",
+    fontWeight: 'bold',
+    background: "#333",
     margin: "2.5px",
     borderRadius: 16,
     cursor: 'default',
   },
   image: {
-    width: 32,
-    height: 32,
+    width: 24,
+    height: 24,
+    margin: 4,
     overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: 12,
     background: "#888",
   },
   text: {
@@ -48,7 +50,7 @@ let styles = {
     height: 20,
     color: "#e0e0e0",
     borderRadius: 12,
-    background: "#aaa",
+    background: "#666",
     margin: "0 6px"
   }
 }
