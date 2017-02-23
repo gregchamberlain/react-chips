@@ -1,4 +1,6 @@
-# react-chips [![npm version](https://badge.fury.io/js/react-chips.svg)](https://badge.fury.io/js/react-chips)
+# react-chips
+[![npm version](https://badge.fury.io/js/react-chips.svg)](https://badge.fury.io/js/react-chips)]
+[![Build Status](https://travis-ci.org/gregchamberlain/react-chips.svg?branch=master)](https://travis-ci.org/gregchamberlain/react-chips)
 
 A controlled React input for arrays of data.
 ![Example](assets/example.gif)
