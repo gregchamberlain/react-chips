@@ -22,7 +22,7 @@ The development environment is already setup and ready to go (hot-loading and li
 
 ## Testing
 
-Tests are written in the `/test` directory, using [mocha](https://mochajs.org/), [chai](http://chaijs.com/), and [enzyme](https://github.com/airbnb/enzyme)
+Tests are written in the `/test` directory, using [Jest](https://facebook.github.io/jest), and [enzyme](https://github.com/airbnb/enzyme)
 
 ## Publishing to npm
 
