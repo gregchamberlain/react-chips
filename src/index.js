@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Starter = () => (
-  <h1>React Component Boilerplate</h1>
+  <div>
+    <h1>React Component Boilerplate</h1>
+  </div>
 );
 
 export default Starter;
