@@ -6,4 +6,6 @@ const Starter = () => (
   </div>
 );
 
+export const OtherComp = () => <div>Hello there!</div>;
+
 export default Starter;
