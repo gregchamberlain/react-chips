@@ -26,9 +26,11 @@ var config = {
   plugins: [
     {
       apply: function apply(compiler) {
-        compiler.parser.plugin('expression global', function expressionGlobalPlugin() {
-          this.state.module.addVariable('global', "(function() { return this; }()) || Function('return this')()")
-          return false;
+        compiler.plugin("parser", function(parser, options) {
+          parser.plugin('expression global', function expressionGlobalPlugin() {
+            this.state.module.addVariable('global', "(function() { return this; }()) || Function('return this')()")
+            return false;
+          });
         });
       }
     },
