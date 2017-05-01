@@ -55,6 +55,8 @@ class YourComponent extends Component {
 |`placeholder`|String||The placeholder to populate the input with|
 |`theme`|Object||A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
 |`suggestions`|Array||Data to fill the autocomplete list with|
+|`fetchSuggestions`|Function|| Delegate expecting to recive autocomplete suggestions (callback or promise)|
+|`fetchSuggestionsThrushold`|Number|| Maximum calls to fetchSuggestions per-second |
 |`fromSuggestionsOnly`|Boolean||Only allow chips to be added from the suggestions list|
 |`uniqueChips`|Boolean||Only allow one chip for each object|
 |`renderChip`|Function||For custom chip usage. A function that passes the value of the chip as an argument, must return an element that will be rendered as each chip.|
