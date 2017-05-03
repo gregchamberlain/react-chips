@@ -127,7 +127,7 @@ class Chips extends Component {
       this.asyncSuggestLimiter.invoke(fetchSuggestions, value);
     } else {
       this.setState({
-        suggestions: this.getItems().filter(opts => suggestionsFilter(opts, filterValue))
+        suggestions: this.getItems().filter(opts => suggestionsFilter(opts, value))
       });
     }
   }
