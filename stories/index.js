@@ -32,7 +32,7 @@ const fetchSuggestions = (value) => {
     if(value.length >= 1){
       setTimeout(() => {
         let filtered = suggestions
-          .filter(item => item.startsWith(value));
+          .filter(opt => opt.toLowerCase().indexOf(value.toLowerCase()) !== -1)
         resolve(filtered);
       }, 1000);
     } else {
