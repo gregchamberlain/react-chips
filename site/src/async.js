@@ -28,7 +28,7 @@ class AsyncExample extends Component {
       if(value.length >= 1){
 
         setTimeout(() => {
-          let filtered = data.filter(item => item.startsWith(value));
+          let filtered = data.filter(opt => opt.toLowerCase().indexOf(value.toLowerCase()) !== -1);
           resolve(filtered);
         }, 1000);
 
