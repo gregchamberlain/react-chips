@@ -65,7 +65,7 @@ class YourComponent extends Component {
 |`renderSuggestion`|Function||For custom autocomplete list item usage. A function that passes the value as an argument, must return an element to render for each list item.|
 |`shouldRenderSuggestions`|Function||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#shouldRenderSuggestionsProp)|
 |`alwaysRenderSuggestions`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#alwaysRenderSuggestionsProp)|
-|`focusFirstSuggestion`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#focusFirstSuggestionProp)|
+|`highlightFirstSuggestion`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#focusFirstSuggestionProp)|
 |`focusInputOnSuggestionClick`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#focusInputOnSuggestionClickProp)|
 |`multiSection`|Boolean||See [AutoSuggest](https://github.com/moroshko/react-autosuggest#multiSectionProp)|
 |`renderSectionTitle`|Function|✓ when multiSection={true}|See [AutoSuggest](https://github.com/moroshko/react-autosuggest#renderSectionTitleProp)|

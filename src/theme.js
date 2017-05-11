@@ -46,7 +46,7 @@ const theme = {
   suggestion: {
     padding: '5px 15px'
   },
-  suggestionFocused: {
+  suggestionHighlighted: {
     background: '#ddd'
   },
   sectionContainer: {
