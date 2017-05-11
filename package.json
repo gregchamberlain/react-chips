@@ -53,6 +53,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.9",
     "react": "^0.14.0 || ^15.3.0"
   },
   "dependencies": {
