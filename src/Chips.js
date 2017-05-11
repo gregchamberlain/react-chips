@@ -102,6 +102,11 @@ class Chips extends Component {
     this.setState({suggestions: []})
   }
 
+  onSuggestionSelected = (e, { suggestion }) => {
+    this.addChip(suggestion);
+    this.setState({ value: '' });
+  }
+
   onChange = (e, { newValue }) => {
     if (!this.props.fromSuggestionsOnly && newValue.indexOf(',') !== -1) {
       let chips = newValue.split(",").map((val) => val.trim()).filter((val) => val !== "");
@@ -137,8 +142,9 @@ class Chips extends Component {
           suggestions={this.state.suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={val => this.state.value}
           inputProps={inputProps}
-          onSuggestionSelected={(e, {suggestion}) => this.addChip(suggestion)}
+          onSuggestionSelected={this.onSuggestionSelected}
         />
       </div>
     );
@@ -161,7 +167,7 @@ Chips.propTypes = {
   renderSuggestion: PropTypes.func,
   shouldRenderSuggestions: PropTypes.func,
   alwaysRenderSuggestions: PropTypes.func,
-  focusFirstSuggestion: PropTypes.bool,
+  highlightFirstSuggestion: PropTypes.bool,
   focusInputOnSuggestionClick: PropTypes.bool,
   multiSection: PropTypes.bool,
   renderSectionTitle: PropTypes.func,

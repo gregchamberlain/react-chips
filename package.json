@@ -1,6 +1,6 @@
 {
   "name": "react-chips",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A flexible and easy to use Chips component for React",
   "keywords": [
     "react",
@@ -53,6 +53,7 @@
     "webpack-hot-middleware": "^2.13.2"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.9",
     "react": "^0.14.0 || ^15.3.0"
   },
   "dependencies": {

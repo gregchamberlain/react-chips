@@ -30,11 +30,10 @@ const data = [
 storiesOf('Chips', module)
   .add('Basic', () => (
     <Chips
-      createChipKeys={[13]}
       placeholder="Type a Programming Language"
       suggestions={suggestions}
       fromSuggestionsOnly={false}
-      shouldRenderSuggestions={value => true}
+      highlightFirstSuggestion={true}
     />
   ))
   .add('Custom Chip', () => (
