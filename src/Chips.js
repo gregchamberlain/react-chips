@@ -24,7 +24,7 @@ class Chips extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.asyncSuggestLimiter.interval = nextProps.fetchSuggestionsThrushold;
+    this.asyncSuggestLimiter.interval = (1000 / nextProps.fetchSuggestionsThrushold);
   }
   
   onBlur = e => {
@@ -92,21 +92,21 @@ class Chips extends Component {
     });
   }
 
-  getItems = () => {
-    if (this.props.uniqueChips) {
-      return this.props.suggestions.filter(item => this.props.value.indexOf(this.props.getChipValue(item)) === -1);
-    } else {
-      return this.props.suggestions;
-    }
+  filterUniqueChips = suggestions => {
+    let { value, getChipValue, getSuggestionValue } = this.props;
+
+    return suggestions
+      .filter(suggestion => !value.some(chip => getChipValue(chip) == getSuggestionValue(suggestion)));
   }
 
   callFetchSuggestions = (fetchSuggestions, value, canceled) => {
-
+    let { uniqueChips } = this.props;
+    
     let callback = suggestions => {
       if(!canceled.isCancaled()){
         this.setState({ 
           loading: false,
-          suggestions
+          suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions)
         });
       }
     }
@@ -120,7 +120,7 @@ class Chips extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const { suggestions, fetchSuggestions, suggestionsFilter } = this.props;
+    let { uniqueChips, suggestions, fetchSuggestions, suggestionsFilter } = this.props;
 
     if( fetchSuggestions ){
       this.setState({loading: true});
@@ -128,7 +128,7 @@ class Chips extends Component {
       this.asyncSuggestLimiter.invoke(fetchSuggestions, value);
     } else {
       this.setState({
-        suggestions: this.getItems().filter(opts => suggestionsFilter(opts, value))
+        suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions).filter(opts => suggestionsFilter(opts, value))
       });
     }
   }
