@@ -48,7 +48,6 @@ class AsyncExample extends Component {
       <Chips
         value={this.state.value}
         onChange={this.onChange}
-        createChipKeys={[13]}
         placeholder="Type a Programming Language"
         fetchSuggestions={ this.fetchData.bind(this) }
         fetchSuggestionMin={ 3 }

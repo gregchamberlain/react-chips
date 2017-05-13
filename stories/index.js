@@ -73,7 +73,6 @@ storiesOf('Chips', module)
   ))
   .add('Async', () => (
     <Chips
-      createChipKeys={[13]}
       placeholder="Type a Programming Language"
       fetchSuggestions={fetchSuggestions}
     />
