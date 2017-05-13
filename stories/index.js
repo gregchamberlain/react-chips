@@ -27,6 +27,20 @@ const data = [
   {name: 'Go', image: 'https://www.codemate.com/wp-content/uploads/2015/11/go-lang-icon-180x180.png' },
 ];
 
+const fetchSuggestions = (value) => {
+  return new Promise((resolve, reject) => {
+    if(value.length >= 1){
+      setTimeout(() => {
+        let filtered = suggestions
+          .filter(opt => opt.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+        resolve(filtered);
+      }, 1000);
+    } else {
+      resolve([]);
+    }
+  });
+};
+
 storiesOf('Chips', module)
   .add('Basic', () => (
     <Chips
@@ -55,6 +69,13 @@ storiesOf('Chips', module)
           opt.name.toLowerCase().indexOf(val.toLowerCase()) !== -1
         )}
         getSuggestionValue={suggestion => suggestion.name}
+    />
+  ))
+  .add('Async', () => (
+    <Chips
+      createChipKeys={[13]}
+      placeholder="Type a Programming Language"
+      fetchSuggestions={fetchSuggestions}
     />
   ));
 

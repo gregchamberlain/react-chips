@@ -6,18 +6,27 @@ import themeable from 'react-themeable';
 
 import theme from './theme';
 import Chip from './Chip';
+import CallLimiter from './CallLimiter';
 
 class Chips extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      loading: false,
       value: "",
       chipSelected: false,
       suggestions: []
     };
+
+    this.asyncSuggestLimiter = 
+      new CallLimiter(this.callFetchSuggestions.bind(this), 1000 / props.fetchSuggestionsThrushold);
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    this.asyncSuggestLimiter.interval = (1000 / nextProps.fetchSuggestionsThrushold);
+  }
+  
   onBlur = e => {
     this.refs.wrapper.focus();
   }
@@ -83,19 +92,45 @@ class Chips extends Component {
     });
   }
 
-  getItems = () => {
-    if (this.props.uniqueChips) {
-      return this.props.suggestions.filter(item => this.props.value.indexOf(this.props.getChipValue(item)) === -1);
-    } else {
-      return this.props.suggestions;
+  filterUniqueChips = suggestions => {
+    let { value, getChipValue, getSuggestionValue } = this.props;
+
+    return suggestions
+      .filter(suggestion => !value.some(chip => getChipValue(chip) == getSuggestionValue(suggestion)));
+  }
+
+  callFetchSuggestions = (fetchSuggestions, value, canceled) => {
+    let { uniqueChips } = this.props;
+    
+    let callback = suggestions => {
+      if(!canceled.isCancaled()){
+        this.setState({ 
+          loading: false,
+          suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions)
+        });
+      }
+    }
+
+    let suggestionResult = 
+      fetchSuggestions.call(this, value, callback);
+
+    if(suggestionResult && 'then' in suggestionResult){ // To Support Promises
+      suggestionResult.then(callback);
     }
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const { suggestions, suggestionsFilter } = this.props;
-    this.setState({
-      suggestions: this.getItems().filter(opts => suggestionsFilter(opts, value))
-    });
+    let { uniqueChips, suggestions, fetchSuggestions, suggestionsFilter } = this.props;
+
+    if( fetchSuggestions ){
+      this.setState({loading: true});
+
+      this.asyncSuggestLimiter.invoke(fetchSuggestions, value);
+    } else {
+      this.setState({
+        suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions).filter(opts => suggestionsFilter(opts, value))
+      });
+    }
   }
 
   onSuggestionsClearRequested = () => {
@@ -120,8 +155,8 @@ class Chips extends Component {
 
   render() {
 
-    const { value, suggestions } = this.state;
-    const { placeholder } = this.props;
+    const { loading, value, suggestions } = this.state;
+    const { placeholder, renderLoading } = this.props;
     const themr = themeable(this.props.theme);
 
     const inputProps = {
@@ -146,6 +181,7 @@ class Chips extends Component {
           inputProps={inputProps}
           onSuggestionSelected={this.onSuggestionSelected}
         />
+        { loading ? renderLoading() : null }
       </div>
     );
   }
@@ -157,6 +193,8 @@ Chips.propTypes = {
   placeholder: PropTypes.string,
   theme: PropTypes.object,
   suggestions: PropTypes.array,
+  fetchSuggestions: PropTypes.func,
+  fetchSuggestionsThrushold: PropTypes.number,
   fromSuggestionsOnly: PropTypes.bool,
   uniqueChips: PropTypes.bool,
   renderChip: PropTypes.func,
@@ -178,6 +216,8 @@ Chips.defaultProps = {
   placeholder: '',
   theme: theme,
   suggestions: [],
+  fetchSuggestions: null,
+  fetchSuggestionsThrushold: 10,
   createChipKeys: [9],
   fromSuggestionsOnly: false,
   uniqueChips: true,
@@ -185,6 +225,7 @@ Chips.defaultProps = {
   value: [],
   onChange: () => {},
   renderChip: (value) => (<Chip>{value}</Chip>),
+  renderLoading: () => (<span>Loading...</span>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
   getChipValue: (item) => item,

@@ -2,6 +2,7 @@ import React from 'react';
 
 import BasicExample from './basic';
 import CustomExample from './custom';
+import AsyncExample from './async';
 
 const Root = () => (
   <div>
@@ -9,6 +10,8 @@ const Root = () => (
     <BasicExample />
     <h1>Custom</h1>
     <CustomExample />
+    <h1>Async</h1>
+    <AsyncExample />
   </div>
 );
 
