@@ -91,3 +91,22 @@ You may use a custom chip component, simply return the custom component to the r
 |--------|----|-----------|
 |selected|bool|A boolean that tells the chip if it is currently selected.|
 |onRemove|func|A function to be invoked when the chip should be removed|
+
+## Async Suggestions
+To fetch asynchronous suggestions use `fetchSuggestions`.
+
+```js
+<Chips
+  ...
+  fetchSuggestions={(value, callback) => {
+    someAsynCall(callback)
+  }}
+/>
+
+// or with a Promise
+
+<Chips
+  ...
+  fetchSuggestions={(value) => someAsyncCallThatReturnsPromise}
+/>
+```
