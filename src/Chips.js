@@ -209,7 +209,7 @@ Chips.propTypes = {
   getSuggestionValue: PropTypes.func,
   renderSuggestion: PropTypes.func,
   shouldRenderSuggestions: PropTypes.func,
-  alwaysRenderSuggestions: PropTypes.func,
+  alwaysRenderSuggestions: PropTypes.bool,
   highlightFirstSuggestion: PropTypes.bool,
   focusInputOnSuggestionClick: PropTypes.bool,
   multiSection: PropTypes.bool,
