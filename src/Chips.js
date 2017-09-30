@@ -40,7 +40,9 @@ class Chips extends Component {
       this.lastEvent = null;
       return;
     }
+    console.log(this.props.createChipKeys, e.key, this.props.createChipKeys.includes(e.key), e.keyCode, this.props.createChipKeys.includes(e.keyCode));
     if (!this.props.fromSuggestionsOnly && (this.props.createChipKeys.includes(e.keyCode) || this.props.createChipKeys.includes(e.key))) {
+      console.log('creting');
       e.preventDefault();
       if (this.state.value.trim()) this.addChip(this.state.value);
     }
@@ -148,7 +150,7 @@ class Chips extends Component {
   }
 
   onChange = (e, { newValue }) => {
-    if (!this.props.fromSuggestionsOnly && newValue.indexOf(',') !== -1) {
+    if (!this.props.fromSuggestionsOnly && newValue.indexOf(',') !== -1 && this.props.createChipKeys.includes(9)) {
       let chips = newValue.split(",").map((val) => val.trim()).filter((val) => val !== "");
       chips.forEach(chip => {
         this.addChip(chip)

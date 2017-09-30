@@ -31,7 +31,7 @@ class BasicExample extends Component {
       <Chips
         value={this.state.value}
         onChange={this.onChange}
-        createChipKeys={[13]}
+        createChipKeys={['a']}
         placeholder="Type a Programming Language"
         suggestions={data}
         shouldRenderSuggestions={value => value.length >= 0}

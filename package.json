@@ -57,7 +57,7 @@
     "react": "^0.14.0 || ^15.3.0"
   },
   "dependencies": {
-    "radium": "^0.18.2",
+    "radium": "^0.19.4",
     "react-autosuggest": "^9.0.1",
     "react-themeable": "^1.1.0"
   }
