@@ -40,9 +40,7 @@ class Chips extends Component {
       this.lastEvent = null;
       return;
     }
-    console.log(this.props.createChipKeys, e.key, this.props.createChipKeys.includes(e.key), e.keyCode, this.props.createChipKeys.includes(e.keyCode));
     if (!this.props.fromSuggestionsOnly && (this.props.createChipKeys.includes(e.keyCode) || this.props.createChipKeys.includes(e.key))) {
-      console.log('creting');
       e.preventDefault();
       if (this.state.value.trim()) this.addChip(this.state.value);
     }
