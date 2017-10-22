@@ -9,7 +9,9 @@
     "flow-typed/": true,
     "coverage/": true,
     "lib/": true,
-    "dist/": true
+    "dist/": true,
+    ".circleci/": true,
+    ".codeclimate.yml": true
   },
   "path-intellisense.mappings": {
     "src": "${workspaceRoot}/src"
