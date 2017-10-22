@@ -1,7 +1,12 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MyComponent = ({ title }) => (
+type Props = {
+  title: string
+};
+
+const MyComponent = ({ title }: Props) => (
   <h2>{title}</h2>
 );
 
