@@ -2,7 +2,9 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "preumd": "rimraf dist",
-    "umd": "NODE_ENV=production webpack --config webpack.config.production.js"
+    "umd": "NODE_ENV=production webpack --config webpack.config.production.js",
+    "prebuild": "rimraf lib",
+    "build": "NODE_ENV=production ./node_modules/.bin/babel src --out-dir lib"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -12,14 +14,18 @@
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.9.0",
     "eslint-plugin-react": "^7.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-hot-loader": "^3.1.1",
     "rimraf": "^2.6.2",
     "webpack": "^3.8.1",
@@ -36,17 +42,31 @@
       "react"
     ],
     "plugins": [
-      "module-resolver",
-      {
-        "alias": {
-          "src": "./src"
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "src": "./src"
+          }
         }
-      }
+      ]
     ],
     "env": {
       "development": {
         "plugins": [
           "react-hot-loader/babel"
+        ]
+      },
+      "production": {
+        "plugins": [
+          [
+            "transform-react-remove-prop-types",
+            {
+              "ignoreFilenames": [
+                "node_modules"
+              ]
+            }
+          ]
         ]
       }
     }
@@ -70,7 +90,10 @@
         2,
         "never"
       ],
-      "semi": ["error", "always"],
+      "semi": [
+        "error",
+        "always"
+      ],
       "react/jsx-uses-react": 2,
       "react/jsx-uses-vars": 2,
       "react/react-in-jsx-scope": 2
