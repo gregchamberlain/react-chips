@@ -1,6 +1,21 @@
 {
   "name": "react-component-boilerplate",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "A boilerplate project for react component libraries.",
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregchamberlain/react-component-boilerplate.git"
+  },
+  "author": "Greg Chamberlain <gregchamberlain94@gmail.com> (https://gregchamberlain.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gregchamberlain/react-component-boilerplate/issues"
+  },
+  "homepage": "https://github.com/gregchamberlain/react-component-boilerplate#readme",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "test": "jest --coverage",
