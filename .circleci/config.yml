@@ -33,4 +33,4 @@ jobs:
       - run: yarn test
       - run:
           name: Upload Test Results
-          command: ./cc-test-reporter after-build --exit-code 1
+          command: ./cc-test-reporter after-build --exit-code 0
