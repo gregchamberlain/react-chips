@@ -1,11 +1,7 @@
 import React from 'react';
 
-const Starter = () => (
-  <div>
-    <h1>React Component Boilerplate</h1>
-  </div>
+const MyComponent = () => (
+  <h1>React Component Boilerplate</h1>
 );
 
-export const OtherComp = () => <div>Hello there!</div>;
-
-export default Starter;
+export default MyComponent;

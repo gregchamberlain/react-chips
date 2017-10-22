@@ -1,43 +1,34 @@
-var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-
   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './site/src/index.js'
+    './examples/index.js'
   ],
-
   output: {
+    path: __dirname + '/examples',
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'site', 'dist'),
-    publicPath: '/site/dist/'
+    publicPath: '/public'
   },
-
-  devtool: 'cheap-module-inline-source-map',
-
+  devtool: 'inline-source-map',
   module: {
-    rules: [{
-      test: /\.js?$/,
-      use: ['babel-loader'],
-      exclude: /node_modules/
-    }]
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+    ]
   },
-
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
-
   devServer: {
+    contentBase: "./examples",
     host: 'localhost',
     port: 3000,
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    inline: true
   }
-  
-};
-
+}
