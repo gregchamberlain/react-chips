@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
+    "test": "jest --coverage",
+    "test:watch": "npm run test -- --watch",
     "preumd": "rimraf dist",
     "umd": "NODE_ENV=production webpack --config webpack.config.production.js",
     "prebuild": "rimraf lib",
@@ -27,13 +29,18 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint": "^4.9.0",
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-react": "^7.4.0",
     "flow-bin": "^0.57.3",
+    "jest": "^21.2.1",
+    "raf": "^3.4.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-hot-loader": "^3.1.1",
+    "react-test-renderer": "16",
     "rimraf": "^2.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
@@ -60,6 +67,12 @@
       ]
     ],
     "env": {
+      "test": {
+        "presets": [
+          "env",
+          "react"
+        ]
+      },
       "development": {
         "plugins": [
           "react-hot-loader/babel"

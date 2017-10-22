@@ -6,7 +6,10 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "node_modules/": true,
-    "flow-typed/": true
+    "flow-typed/": true,
+    "coverage/": true,
+    "lib/": true,
+    "dist/": true
   },
   "path-intellisense.mappings": {
     "src": "${workspaceRoot}/src"

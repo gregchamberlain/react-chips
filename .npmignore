@@ -2,6 +2,7 @@
 /site/
 /node_modules/
 /tests/
+/coverage/
 .babelrc
 .eslintrc
 .gitignore
