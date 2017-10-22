@@ -4,7 +4,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "test": "jest --coverage",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "jest --coverage --watch",
     "preumd": "rimraf dist",
     "umd": "NODE_ENV=production webpack --config webpack.config.production.js",
     "prebuild": "rimraf lib",
