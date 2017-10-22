@@ -34,5 +34,5 @@ jobs:
       - run:
           name: Upload Test Results
           command: |
-              ./cc-test-reporter format-coverage -t lcov coverage/coverage-final.json
+              ./cc-test-reporter format-coverage -t lcov coverage/lcov.info
               ./cc-test-reporter upload-coverage
