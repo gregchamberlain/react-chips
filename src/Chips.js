@@ -1,16 +1,19 @@
 // @flow
 import React from 'react';
+import type { ChildrenArray, Node, Element } from 'react';
 import PropTypes from 'prop-types';
+import { findDOMNode } from 'react-dom';
 
 import Chip from 'src/Chip';
 
 type Props = {
   onRequestRemoveChip: (index: number) => () => void,
   value: Array<mixed>,
-  style: {[string]: mixed}
+  style: {[string]: mixed},
+  children: ChildrenArray<Node>
 };
 
-const Chips = ({ value, onRequestRemoveChip, style }: Props): React$Node => {
+const Chips = ({ value, onRequestRemoveChip, style, children }: Props): React$Node => {
   const chips = value.map((chipValue: mixed, index: number): React$Node => (
     <Chip
       key={index}
@@ -22,6 +25,7 @@ const Chips = ({ value, onRequestRemoveChip, style }: Props): React$Node => {
   return (
     <div style={style}>
       {chips}
+      {children}
     </div>
   );
 };
@@ -29,7 +33,8 @@ const Chips = ({ value, onRequestRemoveChip, style }: Props): React$Node => {
 Chips.propTypes = {
   onRequestRemoveChip: PropTypes.func,
   value: PropTypes.arrayOf(PropTypes.any.isRequired).isRequired,
-  style: PropTypes.object
+  style: PropTypes.object,
+  children: PropTypes.node
 };
 
 Chips.defaultProps = {

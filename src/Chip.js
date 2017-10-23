@@ -24,7 +24,9 @@ const styles: {
     margin: 2,
     padding: '2px 4px',
     border: '1px solid #333',
-    borderRadius: 2
+    borderRadius: 2,
+    fontSize: 14,
+    boxSizing: 'border-box'
   },
   remove: {
     cursor: 'pointer',

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 
-import Chips from 'src';
+import Chips, { Input } from 'src';
 
 type Props = {};
 type State = {
@@ -29,25 +29,19 @@ class BasicExample extends Component<Props, State> {
     this.setState({ inputValue: e.target.value });
   }
 
-  addChip = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (this.state.inputValue) {
-      this.setState((state: State): {} => ({
-        value: [...state.value, state.inputValue],
-        inputValue: ''
-      }));
-    }
+  addChip = (chip: mixed) => {
+    this.setState((state: State): {} => ({
+      value: [...state.value, chip]
+    }));
   }
 
   render(): React$Node {
     return (
-      <div>
-        <form onSubmit={this.addChip}>
-        <input type="text" value={this.state.inputValue} onChange={this.onChange} />
-        <button>Add Chip</button>
-        </form>
-        <Chips value={this.state.value} onRequestRemoveChip={this.onRequestRemove}/>
-      </div>
+      <Chips value={this.state.value} onRequestRemoveChip={this.onRequestRemove}>
+        <Input
+          onRequestAddChip={this.addChip}
+        />
+      </Chips>
     );
   }
 };
