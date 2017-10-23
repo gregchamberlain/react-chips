@@ -1,6 +1,9 @@
-[ignore]
-.*/node_modules/.*
 [include]
+./src/.*
+./examples/.*
+
+[ignore]
+./node_modules/.*
 
 [libs]
 ./flow-typed/
@@ -9,3 +12,4 @@
 
 [options]
 module.name_mapper='^src' ->'<PROJECT_ROOT>/src'
+module.ignore_non_literal_requires=true

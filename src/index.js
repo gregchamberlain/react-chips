@@ -6,7 +6,7 @@ type Props = {
   title: string
 };
 
-const MyComponent = ({ title }: Props) => (
+const MyComponent = ({ title }: Props): React$Element<'h2'> => (
   <h2>{title}</h2>
 );
 

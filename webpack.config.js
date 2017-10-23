@@ -23,11 +23,11 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
   ],
   devServer: {
-    contentBase: "./examples",
+    contentBase: './examples',
     host: 'localhost',
     port: 3000,
     historyApiFallback: true,
     hot: true,
     inline: true
   }
-}
+};

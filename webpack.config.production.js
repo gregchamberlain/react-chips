@@ -5,16 +5,16 @@ var reactExternal = {
   commonjs2: 'react',
   commonjs: 'react',
   amd: 'react',
-}
+};
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   externals: {
     'react': reactExternal
   },
   output: {
-    path: __dirname + "/dist",
-    filename: "ReactComponentBoilerplate.min.js",
+    path: __dirname + '/dist',
+    filename: 'ReactComponentBoilerplate.min.js',
     library: 'ReactComponentBoilerplate',
     libraryTarget: 'umd'
   },
@@ -31,4 +31,4 @@ module.exports = {
       comments: false
     })
   ]
-}
+};
