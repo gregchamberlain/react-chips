@@ -3,13 +3,16 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+general:
+  artifacts:
+    - "coverage/"
 jobs:
   build:
-    docker:
-      - image: circleci/node:7.10
-
     environment:
       - CC_TEST_REPORTER_ID: "96b517fb03268c9679d5e18fb9d63570c7922d62c2f6190890576c6cd6a14c2e"
+
+    docker:
+      - image: circleci/node:7.10
 
     working_directory: ~/repo
 
