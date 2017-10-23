@@ -18,7 +18,9 @@ describe('Chip', () => {
     expect(onRequestRemove).toHaveBeenCalledTimes(1);
   });
   it('Changes backgroundColor when selected', () => {
-    const chip = shallow(<Chip value="Test" onRequestRemove={() => {}} selected />);
-    expect(chip.getNode().props().style.backgroundColor).toEqual('#ccc');
+    const chip = shallow(<Chip value="Test" onRequestRemove={() => {}} />);
+    const selectedChip = shallow(<Chip value="Test" onRequestRemove={() => {}} selected />);
+    expect(chip.props().style).toHaveProperty('backgroundColor', '#eee');
+    expect(selectedChip.props().style).toHaveProperty('backgroundColor', '#ccc');
   });
 });
