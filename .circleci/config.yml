@@ -3,9 +3,6 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-general:
-  artifacts:
-    - "coverage/"
 jobs:
   build:
     environment:
@@ -34,6 +31,8 @@ jobs:
               chmod +x ./cc-test-reporter
               ./cc-test-reporter before-build
       - run: yarn test
+      - store_artifacts:
+          path: /coverage
       - run:
           name: Upload Test Results
           command: |
