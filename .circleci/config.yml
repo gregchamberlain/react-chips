@@ -32,7 +32,7 @@ jobs:
               ./cc-test-reporter before-build
       - run: yarn test
       - store_artifacts:
-          path: /coverage
+          path: coverage/
       - run:
           name: Upload Test Results
           command: |
