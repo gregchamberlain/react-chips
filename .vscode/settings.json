@@ -1,3 +1,19 @@
 {
-  "vsicons.presets.angular": false
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules/": true,
+    "flow-typed/": true,
+    "coverage/": true,
+    "lib/": true,
+    "dist/": true,
+    ".circleci/": true,
+    ".codeclimate.yml": true
+  },
+  "path-intellisense.mappings": {
+    "src": "${workspaceRoot}/src"
+  }
 }

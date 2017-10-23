@@ -1,14 +1,16 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-import Starter from '../src/index';
+import MyComponent from 'src';
 
-test('Starter has text', () => {
+configure({ adapter: new Adapter() });
 
-  const starter = shallow(
-    <Starter />
-  );
 
-  expect(starter.text()).toEqual('React Component Boilerplate');
-  
+describe('MyComponent', () => {
+  it('Renders the title in and h2', () => {
+    const title = 'Test Title';
+    const myComponent = shallow(<MyComponent title={title} />);
+    expect(myComponent.contains(<h2>{title}</h2>)).toBe(true);
+  });
 });

@@ -1,5 +1,4 @@
-/node_modules/
-/lib/
-/dist/
-/coverage/
-npm-debug.log
+node_modules/
+lib/
+dist/
+coverage/

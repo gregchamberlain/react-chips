@@ -2,9 +2,11 @@
 /site/
 /node_modules/
 /tests/
+/coverage/
+.circleci/
 .babelrc
 .eslintrc
 .gitignore
 index.html
 webpack.config.js
-webpack.config.prod.js
+webpack.config.production.js

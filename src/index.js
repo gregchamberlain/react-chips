@@ -1,11 +1,17 @@
+// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Starter = () => (
-  <div>
-    <h1>React Component Boilerplate</h1>
-  </div>
+type Props = {
+  title: string
+};
+
+const MyComponent = ({ title }: Props): React$Element<'h2'> => (
+  <h2>{title}</h2>
 );
 
-export const OtherComp = () => <div>Hello there!</div>;
+MyComponent.propTypes = {
+  title: PropTypes.string.isRequired
+};
 
-export default Starter;
+export default MyComponent;
