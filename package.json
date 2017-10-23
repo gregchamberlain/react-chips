@@ -32,6 +32,7 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
+    "babel-preset-stage-1": "^6.24.1",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
@@ -68,6 +69,7 @@
           "modules": false
         }
       ],
+      "stage-1",
       "react",
       "flow"
     ],
@@ -198,5 +200,11 @@
       }
     }
   },
-  "eslintIgnore": ["node_modules/", "coverage/", "dist/", "lib/", "flow-typed/"]
+  "eslintIgnore": [
+    "node_modules/",
+    "coverage/",
+    "dist/",
+    "lib/",
+    "flow-typed/"
+  ]
 }
