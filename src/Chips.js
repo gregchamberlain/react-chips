@@ -87,7 +87,7 @@ class Chips extends Component {
   renderChips = () => {
     return this.props.value.map((chip, idx) => {
       return (
-        React.cloneElement(this.props.renderChip(chip), {
+        React.cloneElement(this.props.renderChip(chip, this.props.chipTheme), {
           selected: this.state.chipSelected && idx === this.props.value.length - 1,
           onRemove: this.removeChip(idx),
           index: idx,
@@ -232,7 +232,7 @@ Chips.defaultProps = {
   getSuggestionValue: s => s,
   value: [],
   onChange: () => {},
-  renderChip: (value) => (<Chip chipTheme={this.props.chipTheme}>{value}</Chip>),
+  renderChip: (value, chipTheme) => (<Chip chipTheme={chipTheme}>{value}</Chip>),
   renderLoading: () => (<span>Loading...</span>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
