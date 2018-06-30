@@ -232,7 +232,7 @@ Chips.defaultProps = {
   getSuggestionValue: s => s,
   value: [],
   onChange: () => {},
-  renderChip: (value, chipTheme) => (<Chip chipTheme={chipTheme}>{value}</Chip>),
+  renderChip: (value, customTheme) => (<Chip theme={customTheme}>{value}</Chip>),
   renderLoading: () => (<span>Loading...</span>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
