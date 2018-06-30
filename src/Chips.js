@@ -7,6 +7,7 @@ import themeable from 'react-themeable';
 import theme from './theme';
 import Chip from './Chip';
 import CallLimiter from './CallLimiter';
+import { chipTheme } from './theme'
 
 class Chips extends Component {
 
@@ -197,6 +198,7 @@ Chips.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   theme: PropTypes.object,
+  chipTheme: PropTypes.object,
   suggestions: PropTypes.array,
   fetchSuggestions: PropTypes.func,
   fetchSuggestionsThrushold: PropTypes.number,
@@ -220,6 +222,7 @@ Chips.propTypes = {
 Chips.defaultProps = {
   placeholder: '',
   theme: theme,
+  chipTheme: chipTheme,
   suggestions: [],
   fetchSuggestions: null,
   fetchSuggestionsThrushold: 10,
@@ -229,7 +232,7 @@ Chips.defaultProps = {
   getSuggestionValue: s => s,
   value: [],
   onChange: () => {},
-  renderChip: (value) => (<Chip>{value}</Chip>),
+  renderChip: (value) => (<Chip chipTheme={this.props.chipTheme}>{value}</Chip>),
   renderLoading: () => (<span>Loading...</span>),
   renderSuggestion: (suggestion, { query }) => <span>{suggestion}</span>,
   suggestionsFilter: (opt, val) => opt.toLowerCase().indexOf(val.toLowerCase()) !== -1,
