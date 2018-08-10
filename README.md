@@ -54,6 +54,7 @@ class YourComponent extends Component {
 |`onChange`|Function|✓|A function called when the value of chips changes, passes the chips value as an argument.|
 |`placeholder`|String||The placeholder to populate the input with|
 |`theme`|Object||A [react-themeable](https://github.com/markdalgleish/react-themeable) theme|
+|`chipTheme`|Object|| A [react-themeable](https://github.com/markdalgleish/react-themeable) theme that will override the default chip theme, 
 |`suggestions`|Array||Data to fill the autocomplete list with|
 |`fetchSuggestions`|Function|| Delegate expecting to recive autocomplete suggestions (callback or promise)|
 |`fetchSuggestionsThrushold`|Number|| Maximum calls to fetchSuggestions per-second |
