@@ -50,6 +50,13 @@ storiesOf('Chips', module)
       highlightFirstSuggestion={true}
     />
   ))
+  .add('Custom Chip Theme', () => (
+    <Chips
+        chipTheme={{ chip: { margin: "3px", padding: 5, background: 'red' } }}
+        suggestions={suggestions}
+        shouldRenderSuggestions={value => value.length >= 0}
+        fromSuggestionsOnly={false} />
+  ))
   .add('Custom Chip', () => (
     <Chips
       placeholder="Type a Programming Language"

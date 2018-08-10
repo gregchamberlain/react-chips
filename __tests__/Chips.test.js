@@ -8,6 +8,11 @@ const minProps = {
   onChange: () => {}
 };
 
+const withChipTheme = {
+  ...minProps,
+  chipTheme: { chip: { padding: 100 } }
+}
+
 test('Renders without exploding', () => {
 
   const chips = shallow(
@@ -17,3 +22,13 @@ test('Renders without exploding', () => {
   expect(chips);
   
 }); 
+
+test('Renders with chipTheme without exploiding', () => {
+  
+  const chips = shallow(
+    <Chips {...withChipTheme} />
+  );
+
+  expect(chips);
+
+});
