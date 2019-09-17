@@ -20,20 +20,20 @@ class Chips extends Component {
       suggestions: []
     };
 
-    this.asyncSuggestLimiter = 
+    this.asyncSuggestLimiter =
       new CallLimiter(this.callFetchSuggestions.bind(this), 1000 / props.fetchSuggestionsThrushold);
   }
 
   componentWillReceiveProps = (nextProps) => {
     this.asyncSuggestLimiter.interval = (1000 / nextProps.fetchSuggestionsThrushold);
   }
-  
+
   onBlur = e => {
-    this.refs.wrapper.focus();
+    this.wrapper.focus();
   }
 
   onFocus = e => {
-    this.refs.wrapper.blur();
+    this.wrapper.blur();
   }
 
   handleKeyDown = e => {
@@ -106,17 +106,16 @@ class Chips extends Component {
 
   callFetchSuggestions = (fetchSuggestions, value, canceled) => {
     let { uniqueChips } = this.props;
-    
     let callback = suggestions => {
       if(!canceled.isCancaled()){
-        this.setState({ 
+        this.setState({
           loading: false,
           suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions)
         });
       }
     }
 
-    let suggestionResult = 
+    let suggestionResult =
       fetchSuggestions.call(this, value, callback);
 
     if(suggestionResult && 'then' in suggestionResult){ // To Support Promises
