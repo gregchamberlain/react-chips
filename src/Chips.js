@@ -175,7 +175,7 @@ class Chips extends Component {
     };
 
     return (
-      <div {...themr(200, 'chipsContainer')} ref="wrapper" >
+      <div {...themr(200, 'chipsContainer')} ref={el => this.wrapper = el} >
         {this.renderChips()}
         <Autosuggest
           {...this.props}
