@@ -20,6 +20,10 @@ class Chips extends Component {
       suggestions: []
     };
 
+    this.setWrapperRef = element => {
+      this.wrapper = element;
+    };
+
     this.asyncSuggestLimiter =
       new CallLimiter(this.callFetchSuggestions.bind(this), 1000 / props.fetchSuggestionsThrushold);
   }
@@ -174,7 +178,7 @@ class Chips extends Component {
     };
 
     return (
-      <div {...themr(200, 'chipsContainer')} ref={el => this.wrapper = el} >
+      <div {...themr(200, 'chipsContainer')} ref={this.setWrapperRef} >
         {this.renderChips()}
         <Autosuggest
           {...this.props}
