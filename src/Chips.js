@@ -20,20 +20,24 @@ class Chips extends Component {
       suggestions: []
     };
 
-    this.asyncSuggestLimiter = 
+    this.asyncSuggestLimiter =
       new CallLimiter(this.callFetchSuggestions.bind(this), 1000 / props.fetchSuggestionsThrushold);
+
+    this.wrapperRef = React.createRef();
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    this.asyncSuggestLimiter.interval = (1000 / nextProps.fetchSuggestionsThrushold);
+  componentDidUpdate = (prevProps) => {
+    if (this.props.fetchSuggestionsThrushold !== prevProps.fetchSuggestionsThrushold) {
+      this.asyncSuggestLimiter.interval = (1000 / this.props.fetchSuggestionsThrushold);
+    }
   }
-  
+
   onBlur = e => {
-    this.refs.wrapper.focus();
+    this.wrapperRef.current && this.wrapperRef.current.focus();
   }
 
   onFocus = e => {
-    this.refs.wrapper.blur();
+    this.wrapperRef.current && this.wrapperRef.current.blur();
   }
 
   handleKeyDown = e => {
@@ -106,17 +110,17 @@ class Chips extends Component {
 
   callFetchSuggestions = (fetchSuggestions, value, canceled) => {
     let { uniqueChips } = this.props;
-    
+
     let callback = suggestions => {
       if(!canceled.isCancaled()){
-        this.setState({ 
+        this.setState({
           loading: false,
           suggestions: (uniqueChips ? this.filterUniqueChips(suggestions) : suggestions)
         });
       }
     }
 
-    let suggestionResult = 
+    let suggestionResult =
       fetchSuggestions.call(this, value, callback);
 
     if(suggestionResult && 'then' in suggestionResult){ // To Support Promises
@@ -175,7 +179,7 @@ class Chips extends Component {
     };
 
     return (
-      <div {...themr(200, 'chipsContainer')} ref="wrapper" >
+      <div {...themr(200, 'chipsContainer')} ref={this.wrapperRef}>
         {this.renderChips()}
         <Autosuggest
           {...this.props}
